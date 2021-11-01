@@ -10,13 +10,21 @@ using System.Runtime.CompilerServices;
 
 namespace BankProgect.BankClass
 {
-    class BankControll
+    class BankControll : ViewModel
     {
         #region Система
-        public ObservableCollection<User<Account>> UserCollection;
+        private ObservableCollection<User<Account>> _UserCollection;
+        /// <summary>
+        /// Пользователи банка
+        /// </summary>
+        public ObservableCollection<User<Account>> UserCollection
+        {
+            get => _UserCollection;
+            set => Set(ref _UserCollection, value);
+        }
         BankControll()
         {
-            UserCollection = new ObservableCollection<User<Account>>();
+            _UserCollection = new ObservableCollection<User<Account>>();
         }
         public static BankControll BankCreate()
         {

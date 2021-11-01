@@ -29,10 +29,11 @@ namespace BankProgect
         {
             users = BankControll.BankCreate();
             InitializeComponent();
+            user = new ObservableCollection<User<Account>>();
             accaunts = new ObservableCollection<Account>();
             users.UserCollection.Add(new User<Account>("Витя"));
             user = users.UserCollection;
-            DataContext = user;
+            
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -172,6 +172,7 @@
     <Compile Include="BankClass\BankControll.cs" />
     <Compile Include="BankClass\User.cs" />
     <Compile Include="BankClass\Bank account\Account.cs" />
+    <Compile Include="BankClass\Base\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
