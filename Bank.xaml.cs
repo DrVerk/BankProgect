@@ -22,23 +22,11 @@ namespace BankProgect
     /// </summary>
     public partial class MainWindow : Window
     {
-        BankControll users { get; set; }
-        ObservableCollection<User<Account>> user { get; set; }
-        ObservableCollection<Account> accaunts { get; set; }
         public MainWindow()
         {
-            users = BankControll.BankCreate();
-            InitializeComponent();
-            user = new ObservableCollection<User<Account>>();
-            accaunts = new ObservableCollection<Account>();
-            users.UserCollection.Add(new User<Account>("Витя"));
-            user = users.UserCollection;
             
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            accaunts = (ObservableCollection<Account>)Us.SelectedItem;
+            InitializeComponent();
+            
         }
     }
 }

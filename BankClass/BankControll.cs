@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 
 namespace BankProgect.BankClass
 {
-    class BankControll : ViewModel
+    internal class BankControll : ViewModel
     {
         #region Система
         private ObservableCollection<User<Account>> _UserCollection;
