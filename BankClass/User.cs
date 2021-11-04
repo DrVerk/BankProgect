@@ -9,11 +9,12 @@ namespace BankProgect
     class User<T>
         where T : Account
     {
-        public string UserName { get;}
+        string _UserName;
+        public string UserName { get => _UserName; }
         public ObservableCollection<T> Numfers { get; set; }
         public User(string name)
         {
-            UserName = name;
+            _UserName = name;
             Numfers = new ObservableCollection<T>();
         }
         /// <summary>

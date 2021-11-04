@@ -5,20 +5,23 @@ namespace BankProgect
     class Account : INumfer
     {
         static Random random;
+        uint _NumNumf;
+        float _Kech;
+        uint _Bet;
         static Account()
         {
             random = new Random();
         }
-        public Account(float kech,uint bet)
+        public Account(float kech, uint bet)
         {
-            Kech = kech;
-            NumNumf = NumNumfGenerator();
-            Bet = bet;
+            _Kech = kech;
+            _NumNumf = NumNumfGenerator();
+            _Bet = bet;
         }
-        public static  string Name { get { return "Не депозитный"; } }
-        public uint NumNumf { get; }
-        public float Kech { get; set; }
-        public uint Bet { get; set; }
+        public static string Name { get => "Не депозитный"; }
+        public uint NumNumf { get => _NumNumf; }
+        public float Kech { get => _Kech; set { _Kech = value; } }
+        public uint Bet { get => _Bet; set { _Bet = value; } }
         private uint NumNumfGenerator()
         {
             uint n = Convert.ToUInt32(Math.Abs(random.Next()));
@@ -28,7 +31,7 @@ namespace BankProgect
         {
             Kech += kech;
         }
-      
+
     }
     interface INumfer
     {

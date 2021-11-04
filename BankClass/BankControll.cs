@@ -13,7 +13,11 @@ namespace BankProgect.BankClass
     internal class BankControll : ViewModel
     {
         #region Система
-        private ObservableCollection<User<Account>> _UserCollection;
+        #region Лист полильзовотелей
+        private ObservableCollection<User<Account>> _UserCollection = new ObservableCollection<User<Account>>
+        { new User<Account>("Женя"),
+            new User<Account>("Миша"),
+            new User<Account>("Костя") };
         /// <summary>
         /// Пользователи банка
         /// </summary>
@@ -22,14 +26,19 @@ namespace BankProgect.BankClass
             get => _UserCollection;
             set => Set(ref _UserCollection, value);
         }
-        BankControll()
+        #endregion
+        #region Счета
+        private ObservableCollection<Account> _UserAccount = new ObservableCollection<Account>();
+        /// <summary>
+        /// Счета пользователя
+        /// </summary>
+        public ObservableCollection<Account> UserAccounts
         {
-            _UserCollection = new ObservableCollection<User<Account>>();
+            get => _UserAccount;
+            set => Set(ref _UserAccount, value);
         }
-        public static BankControll BankCreate()
-        {
-            return new BankControll();
-        }
+        #endregion
+
         #endregion
     }
 }

@@ -173,6 +173,8 @@
     <Compile Include="BankClass\User.cs" />
     <Compile Include="BankClass\Bank account\Account.cs" />
     <Compile Include="BankClass\Base\ViewModel.cs" />
+    <Compile Include="Infrastructure\Commands\Base\Command.cs" />
+    <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -24,9 +24,9 @@ namespace BankProgect
     {
         public MainWindow()
         {
-            
+
             InitializeComponent();
-            
+
         }
     }
 }

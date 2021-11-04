@@ -8,15 +8,18 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Банковская система" Height="450" Width="800">
-   
+    <Window.DataContext>
+        <vm:BankControll/>
+
+    </Window.DataContext>
     <Grid>
         <TabControl HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" >
             <TabItem  Height="20" 
                      VerticalAlignment="Bottom">
                 <TabItem.Header>
-                <StackPanel Orientation="Horizontal">
-                    <iconPacks:PackIconFontAwesome Kind="AddressCardRegular"/>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconFontAwesome Kind="AddressCardRegular"/>
                         <TextBlock Text="Действия" Margin="5,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
@@ -32,8 +35,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <ListView x:Name="Us" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"
-                               Grid.Column="0" SelectedItem="{Binding Path=users.UserCollection,UpdateSourceTrigger=PropertyChanged}"
-                              SelectionChanged="ListView_SelectionChanged">
+                               Grid.Column="0" DataContext="{Binding UserCollection}" SelectedItem="{Binding UserCollection}">
 
                         <ListView.View >
                             <GridView >
@@ -49,7 +51,7 @@
                                   Grid.ColumnSpan="3" VerticalAlignment="Stretch" />
                     <ListView Grid.Column="2" 
                               HorizontalAlignment="Stretch"  
-                              VerticalAlignment="Stretch" SelectedItem="{Binding Path=accaunts}">
+                              VerticalAlignment="Stretch" SelectedItem="{Binding UserAccounts}">
                         <ListView.View >
                             <GridView>
                                 <GridViewColumn Header="Тип" DisplayMemberBinding="{Binding Name}" Width="100"/>
