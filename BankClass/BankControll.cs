@@ -14,7 +14,8 @@ namespace BankProgect.BankClass
     {
         #region Система
         #region Лист полильзовотелей
-        private ObservableCollection<User<Account>> _UserCollection = new ObservableCollection<User<Account>>
+        private ObservableCollection<User<Account>> _UserCollection =
+            new ObservableCollection<User<Account>>
         { new User<Account>("Женя"),
             new User<Account>("Миша"),
             new User<Account>("Костя") };

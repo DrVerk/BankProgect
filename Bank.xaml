@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm ="clr-namespace:BankProgect.BankClass"
-         xmlns:e="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:e="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:lokal="clr-namespace:BankProgect"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
@@ -49,11 +49,14 @@
                               Grid.Column="0" 
                               ItemsSource="{Binding UserCollection}"
                               >
-                        <e:Interaction.Behaviors>
-                            <lokal:BindableSelectedItemBehavior
-                                   SelectedItem= "{Binding SelectedItem, Mode=TwoWay}" />
-                        </e:Interaction.Behaviors>
-
+                        
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource ="{Binding UserName}">
+                                <TextBlock>                        
+                                   <Label Content="{Binding UserName}"/>
+                                </TextBlock>
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
                     </TreeView>
 
                     <GridSplitter Grid.Column="1" 
