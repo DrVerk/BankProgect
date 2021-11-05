@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm ="clr-namespace:BankProgect.BankClass"
-        xmlns:l="clr-namespace:BankProgect"
+         xmlns:e="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:lokal="clr-namespace:BankProgect"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Банковская система" Height="450" Width="800">
@@ -34,7 +35,7 @@
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <ListView x:Name="Us" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"
+                    <!--<ListView x:Name="Us" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"
                                Grid.Column="0" DataContext="{Binding UserCollection}" SelectedItem="{Binding UserCollection}">
 
                         <ListView.View >
@@ -42,7 +43,19 @@
                                 <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding UserName}" Width="150"/>
                             </GridView>
                         </ListView.View>
-                    </ListView>
+                    </ListView>-->
+                    <TreeView HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Grid.Column="0" 
+                              ItemsSource="{Binding UserCollection}"
+                              >
+                        <e:Interaction.Behaviors>
+                            <lokal:BindableSelectedItemBehavior
+                                   SelectedItem= "{Binding SelectedItem, Mode=TwoWay}" />
+                        </e:Interaction.Behaviors>
+
+                    </TreeView>
+
                     <GridSplitter Grid.Column="1" 
                                   HorizontalAlignment="Stretch"
                                   Grid.RowSpan="1" VerticalAlignment="Stretch" />
