@@ -36,26 +36,34 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <!--<ListView x:Name="Us" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"
-                               Grid.Column="0" DataContext="{Binding UserCollection}" SelectedItem="{Binding UserCollection}">
+                               Grid.Column="0" SelectedItem="{Binding UserCollection}"
+                              >
+                        <ListView.ItemTemplate>
 
-                        <ListView.View >
+                            <DataTemplate >
+                                <TextBlock>                        
+                                   <Label Content="{Binding UserName}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        -->
+                    <!--<ListView.View >
                             <GridView >
                                 <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding UserName}" Width="150"/>
                             </GridView>
-                        </ListView.View>
+                        </ListView.View>-->
+                    <!--
                     </ListView>-->
                     <TreeView HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="0" 
-                              ItemsSource="{Binding UserCollection}"
-                              >
-                        
-                        <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource ="{Binding UserName}">
-                                <TextBlock>                        
+                              ItemsSource="{Binding UserCollection}">
+                        <TreeView.ItemTemplate >
+                            <DataTemplate >
+                                <TextBlock >                        
                                    <Label Content="{Binding UserName}"/>
                                 </TextBlock>
-                            </HierarchicalDataTemplate>
+                            </DataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
 
