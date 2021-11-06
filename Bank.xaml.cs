@@ -24,9 +24,13 @@ namespace BankProgect
     {
         public MainWindow()
         {
+            InitializeComponent();                   
+        }
 
-            InitializeComponent();
-
+        private void Taib_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            
+             BankControll.Acount = (User<Account>)Taib.SelectedItem;
         }
     }
 }

@@ -4,8 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm ="clr-namespace:BankProgect.BankClass"
-        xmlns:e="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:lokal="clr-namespace:BankProgect"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Банковская система" Height="450" Width="800">
@@ -57,14 +55,31 @@
                     <TreeView HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="0" 
-                              ItemsSource="{Binding UserCollection}">
+                              ItemsSource="{Binding UserCollection}"
+                              x:Name="Taib" SelectedItemChanged="Taib_SelectedItemChanged">
                         <TreeView.ItemTemplate >
                             <DataTemplate >
-                                <TextBlock >                        
-                                   <Label Content="{Binding UserName}"/>
+                                <TextBlock >                
+                                    <iconPacks:PackIconCodicons Kind="Book"/>
+                                    <Label Content="{Binding UserName}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </TreeView.ItemTemplate>
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem >
+                                    <MenuItem.Header>
+                                        <TextBox Text="{Binding name}"/>
+                                    </MenuItem.Header>
+                                    <MenuItem Command="{Binding AddUserCommand}"
+                                          Header="Добавить нового пользователя"
+                                          Icon="{iconPacks:Codicons Kind=Add}"/>                                   
+                                </MenuItem>
+                                <MenuItem Command="{Binding ClearUserCommand}" 
+                                          Header="Удалить пользователя"
+                                          Icon="{iconPacks:Codicons Kind=ArrowSmallDown}"/>
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
                     </TreeView>
 
                     <GridSplitter Grid.Column="1" 
