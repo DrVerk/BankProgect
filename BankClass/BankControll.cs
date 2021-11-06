@@ -10,10 +10,22 @@ namespace BankProgect.BankClass
     {
         #region Система
         #region Строки
-        string _name="";
+        #region name
+        string _name = "";
         public string name { get => _name; set => Set(ref _name, value); }
+        #endregion
+        #region Acount
         static User<Account> _Acount;
-        public static User<Account> Acount { get => _Acount; set => _Acount=value; }
+        public static User<Account> Acount { get => _Acount; set => _Acount = value; }
+        #endregion
+        #region kech
+        float _kech;
+        public float kech { get => _kech; set => Set(ref _kech , value); }
+        #endregion
+        #region bet
+        uint _bet;
+        public uint bet { get => _bet; set => Set(ref _bet,value); }
+        #endregion
         #endregion
         #region Лист полильзовотелей
         private ObservableCollection<User<Account>> _UserCollection =
@@ -60,8 +72,14 @@ namespace BankProgect.BankClass
         }
         private bool CanClearUserCommandExecuted(object p) => true;
         #endregion
-        #region 
-
+        #region CreateAccountCommand
+        public ICommand CreateAccountCommand { get; }
+        private void OnCreateAccountCommandExecuted(object p)
+        {
+            Acount.Numfers.Add(new Account(kech,bet));
+            Acount = null;
+        }
+        private bool CanCreateAccountCommandExecuted(object p) => true;
         #endregion
         #endregion
 
@@ -69,9 +87,9 @@ namespace BankProgect.BankClass
         public BankControll()
         {
             #region РеализацияКоманд
-            AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted,CanAddUserCommandExecuted);
+            AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanAddUserCommandExecuted);
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanClearUserCommandExecuted);
-            
+
             #endregion
         }
     }

@@ -33,25 +33,6 @@
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <!--<ListView x:Name="Us" HorizontalAlignment="Stretch"   VerticalAlignment="Stretch"
-                               Grid.Column="0" SelectedItem="{Binding UserCollection}"
-                              >
-                        <ListView.ItemTemplate>
-
-                            <DataTemplate >
-                                <TextBlock>                        
-                                   <Label Content="{Binding UserName}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        -->
-                    <!--<ListView.View >
-                            <GridView >
-                                <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding UserName}" Width="150"/>
-                            </GridView>
-                        </ListView.View>-->
-                    <!--
-                    </ListView>-->
                     <TreeView HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="0" 
@@ -67,7 +48,8 @@
                         </TreeView.ItemTemplate>
                         <TreeView.ContextMenu>
                             <ContextMenu>
-                                <MenuItem >
+                                <MenuItem Icon="{iconPacks:Codicons Kind=Account}">
+                                    
                                     <MenuItem.Header>
                                         <TextBox Text="{Binding name}"/>
                                     </MenuItem.Header>
