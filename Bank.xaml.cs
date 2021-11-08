@@ -31,6 +31,7 @@ namespace BankProgect
         {
             
              BankControll.Acount = (User<Account>)Taib.SelectedItem;
+            
         }
     }
 }

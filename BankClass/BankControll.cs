@@ -20,11 +20,11 @@ namespace BankProgect.BankClass
         #endregion
         #region kech
         float _kech;
-        public float kech { get => _kech; set => Set(ref _kech , value); }
+        public float kech { get => _kech; set => Set(ref _kech, value); }
         #endregion
         #region bet
         uint _bet;
-        public uint bet { get => _bet; set => Set(ref _bet,value); }
+        public uint bet { get => _bet; set => Set(ref _bet, value); }
         #endregion
         #endregion
         #region Лист полильзовотелей
@@ -76,20 +76,29 @@ namespace BankProgect.BankClass
         public ICommand CreateAccountCommand { get; }
         private void OnCreateAccountCommandExecuted(object p)
         {
-            Acount.Numfers.Add(new Account(kech,bet));
+            Acount.Numfers.Add(new Account(kech, bet));
             Acount = null;
         }
         private bool CanCreateAccountCommandExecuted(object p) => true;
         #endregion
+        #region BindingAccountCommand
+        public static ICommand BindingAccountCommand { get; set; }
+        private void OnBindingAccountCommandExecuted(object p)
+        {
+            UserAccounts.Clear();
+            UserAccounts = Acount.Numfers;
+        }
+        private bool CanBindingAccountCommandExecuted(object p) => true;
         #endregion
-
+        #endregion
+       
         #endregion
         public BankControll()
         {
             #region РеализацияКоманд
             AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanAddUserCommandExecuted);
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanClearUserCommandExecuted);
-
+            BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted,CanBindingAccountCommandExecuted);
             #endregion
         }
     }

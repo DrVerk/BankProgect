@@ -37,7 +37,8 @@
                               VerticalAlignment="Stretch"
                               Grid.Column="0" 
                               ItemsSource="{Binding UserCollection}"
-                              x:Name="Taib" SelectedItemChanged="Taib_SelectedItemChanged">
+                              x:Name="Taib" SelectedItemChanged="Taib_SelectedItemChanged"
+                              >
                         <TreeView.ItemTemplate >
                             <DataTemplate >
                                 <TextBlock >                
@@ -60,6 +61,8 @@
                                 <MenuItem Command="{Binding ClearUserCommand}" 
                                           Header="Удалить пользователя"
                                           Icon="{iconPacks:Codicons Kind=ArrowSmallDown}"/>
+                                <MenuItem Icon="{iconPacks:Codicons Kind=ActivateBreakpoints}"
+                                    Header="Добавить новый счет"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
                     </TreeView>
