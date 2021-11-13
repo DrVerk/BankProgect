@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using BankProgect.BankClass;
-
 
 namespace BankProgect
 {
@@ -22,16 +8,17 @@ namespace BankProgect
     /// </summary>
     public partial class MainWindow : Window
     {
+        BankControll bank = new BankControll();
         public MainWindow()
         {
-            InitializeComponent();                   
+           
+            InitializeComponent();
+            DataContext = bank;
         }
 
         private void Taib_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            
-             BankControll.Acount = (User<Account>)Taib.SelectedItem;
-            
+           bank.Acount = (User<Account>)Taib.SelectedItem;           
         }
     }
 }

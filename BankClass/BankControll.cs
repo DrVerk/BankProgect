@@ -8,6 +8,7 @@ namespace BankProgect.BankClass
 {
     internal class BankControll : ViewModel
     {
+
         #region Система
         #region Строки
         #region name
@@ -15,8 +16,8 @@ namespace BankProgect.BankClass
         public string name { get => _name; set => Set(ref _name, value); }
         #endregion
         #region Acount
-        static User<Account> _Acount;
-        public static User<Account> Acount { get => _Acount; set => _Acount = value; }
+        User<Account> _Acount;
+        public User<Account> Acount { get => _Acount; set => Set(ref _Acount, value); }
         #endregion
         #region kech
         float _kech;
@@ -76,29 +77,33 @@ namespace BankProgect.BankClass
         public ICommand CreateAccountCommand { get; }
         private void OnCreateAccountCommandExecuted(object p)
         {
-            Acount.Numfers.Add(new Account(kech, bet));
-            Acount = null;
+            if (kech == 0 && bet == 0)
+                Acount.Numfers.Add(new Account(10, 100));
+            else
+                Acount.Numfers.Add(new Account(kech, bet));
         }
         private bool CanCreateAccountCommandExecuted(object p) => true;
         #endregion
         #region BindingAccountCommand
-        public static ICommand BindingAccountCommand { get; set; }
+        public ICommand BindingAccountCommand { get; set; }
         private void OnBindingAccountCommandExecuted(object p)
         {
-            UserAccounts.Clear();
-            UserAccounts = Acount.Numfers;
+            if (Acount != null)
+            {
+                UserAccounts = Acount.Numfers;
+            }
         }
         private bool CanBindingAccountCommandExecuted(object p) => true;
         #endregion
         #endregion
-       
         #endregion
         public BankControll()
         {
             #region РеализацияКоманд
             AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanAddUserCommandExecuted);
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanClearUserCommandExecuted);
-            BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted,CanBindingAccountCommandExecuted);
+            BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanBindingAccountCommandExecuted);
+            CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCreateAccountCommandExecuted);
             #endregion
         }
     }
