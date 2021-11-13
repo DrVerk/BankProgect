@@ -26,6 +26,10 @@ namespace BankProgect.BankClass
         uint _bet;
         public uint bet { get => _bet; set => Set(ref _bet, value); }
         #endregion
+        #region Счет для работы
+        Account _account;
+        public Account account { get => _account; set => Set(ref _account, value); }
+        #endregion
         #endregion
         #region Лист полильзовотелей
         private ObservableCollection<User<Account>> _UserCollection =

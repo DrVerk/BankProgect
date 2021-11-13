@@ -22,6 +22,7 @@
                         <RowDefinition Height="15*"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="5*"/>
+                        <RowDefinition Height="1.2*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -32,8 +33,7 @@
                               VerticalAlignment="Stretch"
                               Grid.Column="0" 
                               ItemsSource="{Binding UserCollection}"                              
-                              x:Name="Taib" SelectedItemChanged="Taib_SelectedItemChanged"
-                              >
+                              x:Name="Taib" SelectedItemChanged="Taib_SelectedItemChanged">
                         <TreeView.ItemTemplate >
                             <DataTemplate >
                                 <TextBlock >                
@@ -68,8 +68,9 @@
                                   HorizontalAlignment="Stretch"
                                   Grid.ColumnSpan="3" VerticalAlignment="Stretch" />
                     <TreeView Grid.Column="2" 
-                              HorizontalAlignment="Stretch"  
-                              VerticalAlignment="Stretch" ItemsSource="{Binding UserAccounts}">
+                              HorizontalAlignment="Stretch"  x:Name="AccountsView"
+                              VerticalAlignment="Stretch" ItemsSource="{Binding UserAccounts}"
+                              SelectedItemChanged="AccountChanged">
                         <TreeView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
@@ -87,29 +88,17 @@
                             </ContextMenu>
                         </TreeView.ContextMenu>
                     </TreeView>
-                    <!--<ListView Grid.Column="2" 
-                              HorizontalAlignment="Stretch"  
-                              VerticalAlignment="Stretch" SelectedItem="{Binding UserAccounts}"
-                              >
-                        <ListView.View >
-                            <GridView>
-                                <GridViewColumn Header="Тип" DisplayMemberBinding="{Binding Name}" Width="100"/>
-                                <GridViewColumn Header="Счет" DisplayMemberBinding="{Binding Kech}" Width="150"/>
-                                <GridViewColumn Header="Ставка" DisplayMemberBinding="{Binding Bet}" Width="100"/>
-                            </GridView>
-                        </ListView.View>
-                        <ListView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Загрузить Счета" 
-                                          Command="{Binding BindingAccountCommand}"
-                                          Icon="{iconPacks:Codicons Kind=Loading, Spin=True,RotationAngle=1 }"/>
-                            </ContextMenu>
-                        </ListView.ContextMenu>
-                    </ListView>-->
-                    <GroupBox Header="{iconPacks:Codicons Kind=Info}"
-                              HorizontalAlignment="Stretch"
-                               Grid.Row="2" 
-                              VerticalAlignment="Stretch" Grid.ColumnSpan="3" BorderBrush="#FF070808"/>
+                    <TabControl Grid.Row="2" Grid.ColumnSpan="3"
+                                 
+                                    HorizontalAlignment="Stretch"                                
+                                    VerticalAlignment="Stretch" >
+                        <TabItem >
+
+                        </TabItem>
+                    </TabControl>
+                    <StatusBar Grid.Row="4" Grid.ColumnSpan="3">
+                        <StatusBarItem Content="{iconPacks:Codicons Kind=Info, Height=15, Width=15}"/>
+                    </StatusBar>
                 </Grid>
             </TabItem>
             <TabItem>

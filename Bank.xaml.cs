@@ -11,14 +11,19 @@ namespace BankProgect
         BankControll bank = new BankControll();
         public MainWindow()
         {
-           
+
             InitializeComponent();
             DataContext = bank;
         }
 
         private void Taib_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-           bank.Acount = (User<Account>)Taib.SelectedItem;           
+            bank.Acount = (User<Account>)Taib.SelectedItem;
+        }
+
+        private void AccountChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            bank.account = (Account)AccountsView.SelectedItem;
         }
     }
 }
