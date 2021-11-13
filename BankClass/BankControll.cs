@@ -8,7 +8,6 @@ namespace BankProgect.BankClass
 {
     internal class BankControll : ViewModel
     {
-
         #region Система
         #region Строки
         #region name
@@ -68,8 +67,11 @@ namespace BankProgect.BankClass
         public ICommand ClearUserCommand { get; }
         private void OnClearUserCommandExecuted(object p)
         {
-            UserCollection.Remove(Acount);
-            Acount = null;
+            if (Acount != null)
+            {
+                UserCollection.Remove(Acount);
+                Acount = null;
+            }
         }
         private bool CanClearUserCommandExecuted(object p) => true;
         #endregion
