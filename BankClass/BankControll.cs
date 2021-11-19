@@ -11,10 +11,12 @@ namespace BankProgect.BankClass
         #region Система
         #region Строки
         #region name
+        //Вспомогательная строка для названия акаунта
         string _name = "";
         public string name { get => _name; set => Set(ref _name, value); }
         #endregion
         #region Acount
+        //Вспомогательная строка для переходного акаунта
         User<Account> _Acount;
         public User<Account> Acount { get => _Acount; set => Set(ref _Acount, value); }
         #endregion
@@ -25,6 +27,14 @@ namespace BankProgect.BankClass
         #region bet
         uint _bet;
         public uint bet { get => _bet; set => Set(ref _bet, value); }
+        #endregion
+        #region deposite
+        uint _deposite;
+        public uint deposite { get => _deposite; set => Set(ref _deposite, value); }
+        #endregion
+        #region DepOr
+        bool _DepOr = true;
+        public bool DepOr { get => _DepOr; set => Set(ref _DepOr, value); }
         #endregion
         #region Счет для работы
         Account _account;
@@ -59,6 +69,9 @@ namespace BankProgect.BankClass
         #endregion
         #region Команды
         #region AddUserCommand
+        /// <summary>
+        /// Добовляет нового пользователя
+        /// </summary>
         public ICommand AddUserCommand { get; }
         private void OnAddUserCommandExecuted(object p)
         {
@@ -68,6 +81,9 @@ namespace BankProgect.BankClass
         private bool CanAddUserCommandExecuted(object p) => true;
         #endregion
         #region ClearUserCommand
+        /// <summary>
+        /// Удоляет выбраного пользователя
+        /// </summary>
         public ICommand ClearUserCommand { get; }
         private void OnClearUserCommandExecuted(object p)
         {
@@ -80,17 +96,36 @@ namespace BankProgect.BankClass
         private bool CanClearUserCommandExecuted(object p) => true;
         #endregion
         #region CreateAccountCommand
+        /// <summary>
+        /// Создает новый счет в выделеном акаунте
+        /// </summary>
         public ICommand CreateAccountCommand { get; }
         private void OnCreateAccountCommandExecuted(object p)
         {
-            if (kech == 0 && bet == 0)
-                Acount.Numfers.Add(new Account(10, 100));
-            else
-                Acount.Numfers.Add(new Account(kech, bet));
+            if (Acount != null)
+            {
+                if (DepOr)
+                {
+                    if (kech == 0 && bet == 0)
+                        Acount.Numfers.Add(new Account(10, 100));
+                    else
+                        Acount.Numfers.Add(new Account(kech, bet));
+                }
+                else
+                {
+                    if (kech == 0 && bet == 0 && deposite == 0)
+                        Acount.Numfers.Add(new DepositAccount(10, 100, 10));
+                    else
+                        Acount.Numfers.Add(new DepositAccount(kech, bet, deposite));
+                }
+            }
         }
         private bool CanCreateAccountCommandExecuted(object p) => true;
         #endregion
         #region BindingAccountCommand
+        /// <summary>
+        /// Требуется для связи ViewModel с xml
+        /// </summary>
         public ICommand BindingAccountCommand { get; set; }
         private void OnBindingAccountCommandExecuted(object p)
         {

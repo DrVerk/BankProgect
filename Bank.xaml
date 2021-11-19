@@ -55,10 +55,7 @@
                                 </MenuItem>
                                 <MenuItem Command="{Binding ClearUserCommand}" 
                                           Header="Удалить пользователя"
-                                          Icon="{iconPacks:Codicons Kind=ArrowSmallDown}"/>
-                                <MenuItem Icon="{iconPacks:Codicons Kind=ActivateBreakpoints}"
-                                          Command="{Binding CreateAccountCommand}"
-                                    Header="Добавить новый счет"/>
+                                          Icon="{iconPacks:Codicons Kind=ArrowSmallDown}"/>                                
                             </ContextMenu>
                         </TreeView.ContextMenu>
                     </TreeView>
@@ -78,14 +75,14 @@
                                     <Label Content="{Binding Name}"/>                                    
                                     <Label Content="{Binding Kech}"/>
                                     <Label Content="{Binding Bet}"/>
+                                    <Label Content="{Binding Deposite}"/>
                                 </TextBlock>
                             </DataTemplate>
-                        </TreeView.ItemTemplate>                        
+                        </TreeView.ItemTemplate>
                     </TreeView>
-                    <TabControl Grid.Row="2" Grid.ColumnSpan="3"
-                                 
+                    <TabControl Grid.Row="2" Grid.ColumnSpan="3"                                 
                                     HorizontalAlignment="Stretch"                                
-                                    VerticalAlignment="Stretch" >
+                                    VerticalAlignment="Stretch">
                         <TabItem Height="20">
                             <TabItem.Header >
                                 <StackPanel Orientation="Horizontal">
@@ -95,19 +92,29 @@
                             </TabItem.Header>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="347*"/>
-                                    <ColumnDefinition Width="335*"/>
-                                    <ColumnDefinition Width="98*"/>
+                                    <ColumnDefinition Width="21*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="100*"/>
+                                    <ColumnDefinition Width="250*"/>
+                                    <ColumnDefinition Width="100*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Button  Grid.Column="2" Grid.Row="0"
+                                <Button  Grid.Column="5" Grid.Row="0"
                                          Content="Загрузить Счета" Command="{Binding BindingAccountCommand}"/>
-
-
+                                <TextBlock TextWrapping="Wrap" Text="Деньги" Margin="5,0" Grid.Column="1"  />
+                                <TextBox TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="1" Text="{Binding kech}"/>
+                                <TextBlock TextWrapping="Wrap"  Grid.Column="2"  Margin="5,0" Text="Ставка"></TextBlock>
+                                <TextBox TextWrapping="Wrap" Grid.Column="2"  Grid.Row="1" Margin="5,0" Text="{Binding bet}"/>
+                                <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Text="Тип акаунта Депрозитный или не Депозитный"/>
+                                <CheckBox  Grid.Row="2" Grid.Column="3" Margin="0,0,100,0" Click="CheckBox_Checked"/>
+                                <Button Grid.Column="4" Margin="0,0,161,0" Content="Создать счет" Grid.Row="2" Command="{Binding CreateAccountCommand}"/>
+                                <TextBlock x:Name="dEP" TextWrapping="Wrap" Text="Депозит" Margin="5,0" Grid.Column="3" Visibility="Hidden" />
+                                <TextBox x:Name="pER" TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="3" Visibility="Hidden" Text="{Binding deposite}" />
                             </Grid>
                         </TabItem>
 

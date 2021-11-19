@@ -2,18 +2,20 @@
 {
     class DepositAccount : Account, IDeposite
     {
-        public uint Deposite { get; set; }
-        public new static string Name { get { return "Депозитный"; } }
+        uint _Deposite;
+        public uint Deposite { get => _Deposite; set => _Deposite = value; }
         public DepositAccount(float kech, uint bet, uint deposite) :
-            base(kech,bet)
+            base(kech, bet)
+            
         {
             Deposite = deposite;
+            base._Name = "Депозитный";
         }
         public void Depositev()
         {
-            
+
         }
-        
+
     }
     interface IDeposite
     {

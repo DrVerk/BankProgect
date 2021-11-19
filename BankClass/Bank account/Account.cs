@@ -8,6 +8,7 @@ namespace BankProgect
         uint _NumNumf;
         float _Kech;
         uint _Bet;
+        protected string _Name = "Не депозитный";
         static Account()
         {
             random = new Random();
@@ -18,20 +19,15 @@ namespace BankProgect
             _NumNumf = NumNumfGenerator();
             _Bet = bet;
         }
-        public static string Name { get => "Не депозитный"; }
+        public string Name { get => _Name; }
         public uint NumNumf { get => _NumNumf; }
         public float Kech { get => _Kech; set { _Kech = value; } }
         public uint Bet { get => _Bet; set { _Bet = value; } }
-        private uint NumNumfGenerator()
-        {
-            uint n = Convert.ToUInt32(Math.Abs(random.Next()));
-            return n;
-        }
+        private uint NumNumfGenerator()=> Convert.ToUInt32(Math.Abs(random.Next()));        
         public void addedKech(float kech)
         {
             Kech += kech;
         }
-
     }
     interface INumfer
     {

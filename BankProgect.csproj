@@ -192,7 +192,7 @@
     <Compile Include="BankClass\Bank account\DepositAccount.cs" />
     <Compile Include="BankClass\BankControll.cs" />
     <Compile Include="BindableSelectedItemBehavior.cs" />
-    <Compile Include="BankClass\User.cs" />
+    <Compile Include="BankClass\Bank account\User.cs" />
     <Compile Include="BankClass\Bank account\Account.cs" />
     <Compile Include="BankClass\Base\ViewModel.cs" />
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />

@@ -21,26 +21,17 @@ namespace BankProgect
         /// Добовление в масив
         /// </summary>
         /// <param name="elem"></param>
-        public void Add(T elem)
-        {
-            Numfers.Add(elem);
-        }
+        public void Add(T elem) => Numfers.Add(elem);
         /// <summary>
         /// удоление элемента из списка
         /// </summary>
         /// <param name="elem"></param>
-        public void Remuve(T elem)
-        {
-            Numfers.Remove(elem);
-        }
+        public void Remuve(T elem) => Numfers.Remove(elem);
         public void Translation(T elem, T elem1, float tranzakt)
         {
             elem.Kech += tranzakt;
             elem1.Kech -= tranzakt;
         }
-        public override string ToString()
-        {
-            return String.Format("{0}", UserName);
-        }
+        public override string ToString() => String.Format("{0}", UserName);
     }
 }

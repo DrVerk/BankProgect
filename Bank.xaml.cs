@@ -25,5 +25,21 @@ namespace BankProgect
         {
             bank.account = (Account)AccountsView.SelectedItem;
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (bank.DepOr)
+            {
+                bank.DepOr = false;
+                pER.Visibility = 0;
+                dEP.Visibility = 0;
+            }
+            else
+            {
+                bank.DepOr = true;
+                pER.Visibility = Visibility.Hidden;
+                dEP.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }
