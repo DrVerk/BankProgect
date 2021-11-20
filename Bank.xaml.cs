@@ -11,7 +11,6 @@ namespace BankProgect
         BankControll bank = new BankControll();
         public MainWindow()
         {
-
             InitializeComponent();
             DataContext = bank;
         }

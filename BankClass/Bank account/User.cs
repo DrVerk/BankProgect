@@ -26,7 +26,7 @@ namespace BankProgect
         /// удоление элемента из списка
         /// </summary>
         /// <param name="elem"></param>
-        public void Remuve(T elem) => Numfers.Remove(elem);
+        public void Remove(T elem) => Numfers.Remove(elem);
         public void Translation(T elem, T elem1, float tranzakt)
         {
             elem.Kech += tranzakt;

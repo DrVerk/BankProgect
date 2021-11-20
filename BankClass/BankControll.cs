@@ -136,6 +136,17 @@ namespace BankProgect.BankClass
         }
         private bool CanBindingAccountCommandExecuted(object p) => true;
         #endregion
+        #region DeleteAccountCommand
+        public ICommand DeleteAccountCommand { get; set; }
+        private void OnDeleteAccountCommandExecuted(object p)
+        {
+            if (Acount != null && account != null)
+            {
+                Acount.Remove(account);
+            }
+        }
+        private bool CanDeleteAccountCommandExecuted(object p) => true;
+        #endregion
         #endregion
         #endregion
         public BankControll()
@@ -145,6 +156,7 @@ namespace BankProgect.BankClass
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanClearUserCommandExecuted);
             BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanBindingAccountCommandExecuted);
             CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCreateAccountCommandExecuted);
+            DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanDeleteAccountCommandExecuted);
             #endregion
         }
     }
