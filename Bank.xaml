@@ -15,7 +15,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconFontAwesome Kind="AddressCardRegular"/>
-                        <TextBlock Text="Действия" Margin="5,0,0,0"/>
+                        <TextBlock Text="Создание Системы" Margin="5,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFE5E5E5">
@@ -44,21 +44,6 @@
                                 </TextBlock>
                             </DataTemplate>
                         </TreeView.ItemTemplate>
-                        <TreeView.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Icon="{iconPacks:Codicons Kind=Account}">
-                                    <MenuItem.Header>
-                                        <TextBox Text="{Binding name}"/>
-                                    </MenuItem.Header>
-                                    <MenuItem Command="{Binding AddUserCommand}"
-                                          Header="Добавить нового пользователя"
-                                          Icon="{iconPacks:Codicons Kind=Add}"/>
-                                </MenuItem>
-                                <MenuItem Command="{Binding ClearUserCommand}" 
-                                          Header="Удалить пользователя"
-                                          Icon="{iconPacks:Codicons Kind=ArrowSmallDown}"/>
-                            </ContextMenu>
-                        </TreeView.ContextMenu>
                     </TreeView>
                     <GridSplitter Grid.Column="2" 
                                   HorizontalAlignment="Stretch"
@@ -88,7 +73,7 @@
                             <TabItem.Header >
                                 <StackPanel Orientation="Horizontal">
                                     <iconPacks:PackIconBootstrapIcons Kind="Asterisk"/>
-                                    <TextBlock Text="Настройки акаунтов"/>
+                                    <TextBlock Text=" Настройки счетов"/>
                                 </StackPanel>
                             </TabItem.Header>
                             <Grid>
@@ -120,7 +105,38 @@
                                 <TextBox x:Name="pER" TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="3" Visibility="Hidden" Text="{Binding deposite}" />
                             </Grid>
                         </TabItem>
-
+                        <TabItem>
+                            <TabItem.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconBootstrapIcons Kind="App"/>
+                                    <TextBlock Text=" Настройки акаунтов"/>
+                                </StackPanel>
+                            </TabItem.Header>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Orientation="Horizontal" >
+                                    <TextBlock Width="172" Text="Имя владельца акаунта"/>
+                                </StackPanel>
+                                <TextBox Grid.Row="1" Text="{Binding name}" />
+                                <Button Grid.Column="1" Grid.Row="2"
+                                        Content="Добавить нового пользователя"
+                                        Command="{Binding AddUserCommand}" Margin="10,0"/>
+                                <Button Grid.Column="2" Grid.Row="2"
+                                        Content="Удалить пользователя"
+                                        Command="{Binding ClearUserCommand}" Margin="10,0"/>
+                                
+                            </Grid>
+                        </TabItem>
                     </TabControl>
                     <StatusBar Grid.Row="3" Grid.ColumnSpan="4">
                         <StatusBarItem Content="{iconPacks:Codicons Kind=Info, Height=15, Width=15}"/>
@@ -131,7 +147,7 @@
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconFontAwesome Kind="AddressCardSolid"/>
-                        <TextBlock Text="Обзор" Margin="5,0,0,0"/>
+                        <TextBlock Text="Переводы" Margin="5,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#FFC9C9C9">

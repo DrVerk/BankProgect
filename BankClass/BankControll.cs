@@ -10,36 +10,29 @@ namespace BankProgect.BankClass
     {
         #region Система
         #region Строки
-        #region name
+
         //Вспомогательная строка для названия акаунта
         string _name = "";
         public string name { get => _name; set => Set(ref _name, value); }
-        #endregion
-        #region Acount
         //Вспомогательная строка для переходного акаунта
         User<Account> _Acount;
         public User<Account> Acount { get => _Acount; set => Set(ref _Acount, value); }
-        #endregion
-        #region kech
+
         float _kech;
         public float kech { get => _kech; set => Set(ref _kech, value); }
-        #endregion
-        #region bet
+
         uint _bet;
         public uint bet { get => _bet; set => Set(ref _bet, value); }
-        #endregion
-        #region deposite
+
         uint _deposite;
         public uint deposite { get => _deposite; set => Set(ref _deposite, value); }
-        #endregion
-        #region DepOr
+
         bool _DepOr = true;
         public bool DepOr { get => _DepOr; set => Set(ref _DepOr, value); }
-        #endregion
-        #region Счет для работы
+
         Account _account;
         public Account account { get => _account; set => Set(ref _account, value); }
-        #endregion
+
         #endregion
         #region Лист полильзовотелей
         private ObservableCollection<User<Account>> _UserCollection =
@@ -50,22 +43,14 @@ namespace BankProgect.BankClass
         /// <summary>
         /// Пользователи банка
         /// </summary>
-        public ObservableCollection<User<Account>> UserCollection
-        {
-            get => _UserCollection;
-            set => Set(ref _UserCollection, value);
-        }
+        public ObservableCollection<User<Account>> UserCollection { get => _UserCollection; set => Set(ref _UserCollection, value); }
         #endregion
         #region Счета
         private ObservableCollection<Account> _UserAccount = new ObservableCollection<Account>();
         /// <summary>
         /// Счета пользователя
         /// </summary>
-        public ObservableCollection<Account> UserAccounts
-        {
-            get => _UserAccount;
-            set => Set(ref _UserAccount, value);
-        }
+        public ObservableCollection<Account> UserAccounts { get { return _UserAccount; } set => Set(ref _UserAccount, value); }
         #endregion
         #region Команды
         #region AddUserCommand
@@ -130,9 +115,7 @@ namespace BankProgect.BankClass
         private void OnBindingAccountCommandExecuted(object p)
         {
             if (Acount != null)
-            {
                 UserAccounts = Acount.Numfers;
-            }
         }
         private bool CanBindingAccountCommandExecuted(object p) => true;
         #endregion
@@ -141,9 +124,7 @@ namespace BankProgect.BankClass
         private void OnDeleteAccountCommandExecuted(object p)
         {
             if (Acount != null && account != null)
-            {
                 Acount.Remove(account);
-            }
         }
         private bool CanDeleteAccountCommandExecuted(object p) => true;
         #endregion
