@@ -103,6 +103,7 @@ namespace BankProgect.BankClass
                     else
                         Acount.Numfers.Add(new DepositAccount(kech, bet, deposite));
                 }
+                kech = 0; bet = 0; deposite = 0;
             }
         }
         private bool CanCreateAccountCommandExecuted(object p) => true;
