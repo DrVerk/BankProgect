@@ -40,5 +40,17 @@ namespace BankProgect
                 dEP.Visibility = Visibility.Hidden;
             }
         }
+
+        private void ComboBox_UserChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (UsCombo.SelectedItem != null)
+                bank.Acount = (User<Account>)UsCombo.SelectedItem;
+        }
+
+        private void AcCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (AcCombo.SelectedItem != null)
+                bank.account = (Account)AcCombo.SelectedItem;
+        }
     }
 }

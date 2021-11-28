@@ -228,17 +228,17 @@
                     <TextBlock HorizontalAlignment="Center" 
                                Margin="21,26,21,6"
                                Text="Акаунт для пополнения" VerticalAlignment="Center" FontSize="18" Grid.Column="1"/>
-                    <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  
+                    <ComboBox x:Name="UsCombo" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch" SelectionChanged="ComboBox_UserChanged" 
                               Grid.Row="1" ItemsSource="{Binding UserCollection}" Grid.Column="1"/>
                     <TextBlock HorizontalAlignment="Center"                                
                                Text="Счет" 
                                VerticalAlignment="Center" 
                                FontSize="18" Grid.Row="2" Grid.Column="1" Margin="100,7,99,6" />
-                    <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  
+                    <ComboBox x:Name="AcCombo" HorizontalAlignment="Stretch" SelectionChanged="AcCombo_SelectionChanged"
+                              VerticalAlignment="Stretch" ItemsSource="{Binding UserAccounts}"  
                               Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock  TextWrapping="Wrap" Text="Деньги для зачисления" Grid.Column="1"  Grid.Row="4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="23,7,23,6" />
+                    <TextBlock  TextWrapping="Wrap" Text="Деньги для зачисления" Grid.Column="1"  Grid.Row="4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,4" Width="238" />
                     <TextBox  TextWrapping="Wrap" Grid.Column="1" Grid.Row="5"/>
                     <Button Grid.Column="2" Grid.Row="5" Content="Зачислить"/>
                 </Grid>
