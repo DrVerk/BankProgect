@@ -2,13 +2,13 @@
 
 namespace BankProgect
 {
-    class Account : INumfer
+    internal class Account : INumfer
     {
         static Random random;
         uint _NumNumf;
         float _Kech;
         uint _Bet;
-        protected string _Name = "Не депозитный";
+        protected string _Name = "Счет";
         static Account()
         {
             random = new Random();
@@ -23,11 +23,13 @@ namespace BankProgect
         public uint NumNumf { get => _NumNumf; }
         public float Kech { get => _Kech; set { _Kech = value; } }
         public uint Bet { get => _Bet; set { _Bet = value; } }
-        private uint NumNumfGenerator()=> Convert.ToUInt32(Math.Abs(random.Next()));        
+        private uint NumNumfGenerator()=> Convert.ToUInt32(random.Next());        
         public void addedKech(float kech)
         {
             Kech += kech;
         }
+        public override string ToString() => String.Format("{0} {1} {2}",Name,NumNumf,Kech);
+       
     }
     interface INumfer
     {

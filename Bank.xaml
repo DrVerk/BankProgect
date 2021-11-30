@@ -7,6 +7,9 @@
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Банковская система" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:BankControll/>
+    </Window.DataContext>
     <Grid>
         <TabControl HorizontalAlignment="Stretch" 
                     VerticalAlignment="Stretch" >
@@ -97,7 +100,7 @@
                                 <TextBox TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="1" Text="{Binding kech}"/>
                                 <TextBlock TextWrapping="Wrap"  Grid.Column="2"  Margin="5,0" Text="Ставка"></TextBlock>
                                 <TextBox TextWrapping="Wrap" Grid.Column="2"  Grid.Row="1" Margin="5,0" Text="{Binding bet}"/>
-                                <TextBlock Grid.Row="2" Grid.ColumnSpan="3" Text="Тип акаунта Депрозитный или не Депозитный"/>
+                                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Тип акаунта Счет или Кредит" Grid.Column="1" Margin="0" HorizontalAlignment="Center"/>
                                 <CheckBox  Grid.Row="2" Grid.Column="3" Margin="0,0,100,0" Click="CheckBox_Checked"/>
                                 <Button Grid.Column="4" Margin="0,0,37,0" Content="Создать счет" Grid.Row="2" Command="{Binding CreateAccountCommand}"/>
                                 <Button Grid.Column="5"  Content="Удалить счет" Grid.Row="2" Command="{Binding DeleteAccountCommand}"/>
@@ -171,38 +174,45 @@
                                Margin="1,26,1,6"
                                Text="C которого переводим" VerticalAlignment="Center" FontSize="18"/>
                     <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  
-                              Grid.Row="1" ItemsSource="{Binding UserCollection}"/>
+                              VerticalAlignment="Stretch"  x:Name="Sc2"
+                              Grid.Row="1" ItemsSource="{Binding UserCollection}" SelectionChanged="ComboBox_SelectionChanged_3"/>
                     <TextBlock HorizontalAlignment="Center" 
                                Margin="77,5,76,27"
                                Text="Счет" 
                                VerticalAlignment="Center" 
                                FontSize="18" Grid.Row="2" Grid.RowSpan="2" />
                     <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  
-                              Grid.Row="3" />
+                              VerticalAlignment="Stretch"  x:Name="Ac1"
+                              Grid.Row="3" ItemsSource="{Binding UserAccounts}" 
+                              SelectionChanged="ComboBox_SelectionChanged_1" />
 
                     <TextBlock HorizontalAlignment="Center" 
                                Margin="1,26,0,6"
                                Text="На которыйпереводим" VerticalAlignment="Center" FontSize="18"
                                Grid.Column="2"/>
                     <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  
-                              Grid.Row="1" Grid.Column="2" ItemsSource="{Binding UserCollection}"/>
+                              VerticalAlignment="Stretch" x:Name="Sc1" 
+                              Grid.Row="1" Grid.Column="2" ItemsSource="{Binding UserCollection}" SelectionChanged="ComboBox_SelectionChanged_2"/>
                     <TextBlock HorizontalAlignment="Center" 
                                Margin="77,5,76,27"
                                Text="Счет" 
                                VerticalAlignment="Center" 
                                FontSize="18" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
                     <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  
-                              Grid.Row="3" Grid.Column="2"/>
+                              VerticalAlignment="Stretch" x:Name="Ac2" 
+                              Grid.Row="3" Grid.Column="2"  ItemsSource="{Binding UserAccounts1}" 
+                              SelectionChanged="ComboBox_SelectionChanged"/>
                     <Button Content="Перевести" Grid.Column="3"
                             HorizontalAlignment="Stretch"  
-                            Grid.Row="4" VerticalAlignment="Stretch" />
+                            Grid.Row="4" VerticalAlignment="Stretch"
+                            Command="{Binding CalculetionAccoundCommand}"/>
+                    <Button  Grid.Column="6" Grid.Row="1"
+                                         Content="Загрузить Счета" Command="{Binding BindingAccountCommand}"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="78,8,0,0" Grid.Row="4" TextWrapping="Wrap" Text="Сумма для перевода" VerticalAlignment="Center" Grid.ColumnSpan="3" Width="248" Height="23" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+                    <TextBox HorizontalAlignment="Center" Height="31" Margin="78,0,0,0" Grid.Row="5" Text="{Binding kech}" TextWrapping="Wrap" Width="248" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </TabItem>
-            <TabItem>
+            <TabItem >
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <iconPacks:PackIconFontAwesome Kind="AngleDownSolid"/>
@@ -239,8 +249,13 @@
                               VerticalAlignment="Stretch" ItemsSource="{Binding UserAccounts}"  
                               Grid.Row="3" Grid.Column="1"/>
                     <TextBlock  TextWrapping="Wrap" Text="Деньги для зачисления" Grid.Column="1"  Grid.Row="4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,4" Width="238" />
-                    <TextBox  TextWrapping="Wrap" Grid.Column="1" Grid.Row="5"/>
-                    <Button Grid.Column="2" Grid.Row="5" Content="Зачислить"/>
+                    <TextBox  TextWrapping="Wrap" Grid.Column="1"
+                              Text="{Binding kech}" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Button Grid.Column="2" Grid.Row="5" Content="Зачислить"
+                            Command="{Binding CalculetionUserCommand}"/>
+                    <Button  Grid.Column="6" Grid.Row="1"
+                                         Content="Загрузить Счета" Command="{Binding BindingAccountCommand}"/>
+
                 </Grid>
             </TabItem>
         </TabControl>

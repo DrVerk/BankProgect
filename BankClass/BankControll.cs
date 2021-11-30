@@ -17,6 +17,8 @@ namespace BankProgect.BankClass
         //Вспомогательная строка для переходного акаунта
         User<Account> _Acount;
         public User<Account> Acount { get => _Acount; set => Set(ref _Acount, value); }
+        User<Account> _Acount1;
+        public User<Account> Acount1 { get => _Acount1; set => Set(ref _Acount1, value); }
 
         float _kech;
         public float kech { get => _kech; set => Set(ref _kech, value); }
@@ -32,6 +34,8 @@ namespace BankProgect.BankClass
 
         Account _account;
         public Account account { get => _account; set => Set(ref _account, value); }
+        Account _account1;
+        public Account account1 { get => _account1; set => Set(ref _account1, value); }
 
         #endregion
         #region Лист полильзовотелей
@@ -51,6 +55,11 @@ namespace BankProgect.BankClass
         /// Счета пользователя
         /// </summary>
         public ObservableCollection<Account> UserAccounts { get { return _UserAccount; } set => Set(ref _UserAccount, value); }
+        private ObservableCollection<Account> _UserAccount1 = new ObservableCollection<Account>();
+        /// <summary>
+        /// Счета пользователя
+        /// </summary>
+        public ObservableCollection<Account> UserAccounts1 { get { return _UserAccount1; } set => Set(ref _UserAccount1, value); }
         #endregion
         #region Команды
         #region AddUserCommand
@@ -117,6 +126,8 @@ namespace BankProgect.BankClass
         {
             if (Acount != null)
                 UserAccounts = Acount.Numfers;
+            if (Acount1 != null)
+                UserAccounts1 = Acount1.Numfers;
         }
         private bool CanBindingAccountCommandExecuted(object p) => true;
         #endregion
@@ -129,6 +140,37 @@ namespace BankProgect.BankClass
         }
         private bool CanDeleteAccountCommandExecuted(object p) => true;
         #endregion
+        #region CalculetionAccoundCommand
+        /// <summary>
+        /// Вычисление для счетов
+        /// </summary>
+        public ICommand CalculetionAccoundCommand { get; }
+        private void OnCalculetionAccoundCommandExecuted(object p)
+        {
+            if (account != null && account1 != null)
+            {
+                Acount.Translation(account, Calculetion.Minus, kech);
+                Acount.Translation(account1, Calculetion.Plus, kech);
+                kech = 0;
+            }
+        }
+        private bool CanCalculetionAccoundCommandExecuted(object p) => true;
+        #endregion
+        #region CalculetionUserCommand
+        /// <summary>
+        /// Вычисление для счетов
+        /// </summary>
+        public ICommand CalculetionUserCommand { get; }
+        private void OnCalculetionUserCommandExecuted(object p)
+        {
+            if (account != null )
+            {
+                Acount.Translation(account, Calculetion.Plus, kech);
+                kech = 0;
+            }
+        }
+        private bool CanCalculetionUserCommandExecuted(object p) => true;
+        #endregion
         #endregion
         #endregion
         public BankControll()
@@ -139,6 +181,8 @@ namespace BankProgect.BankClass
             BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanBindingAccountCommandExecuted);
             CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCreateAccountCommandExecuted);
             DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanDeleteAccountCommandExecuted);
+            CalculetionAccoundCommand = new LambdaCommand(OnCalculetionAccoundCommandExecuted,CanCalculetionAccoundCommandExecuted);
+            CalculetionUserCommand = new LambdaCommand(OnCalculetionUserCommandExecuted,CanCalculetionUserCommandExecuted);
             #endregion
         }
     }

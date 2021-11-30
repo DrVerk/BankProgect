@@ -52,5 +52,29 @@ namespace BankProgect
             if (AcCombo.SelectedItem != null)
                 bank.account = (Account)AcCombo.SelectedItem;
         }
+
+        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (Ac2.SelectedItem != null)
+                bank.account1 = (Account)Ac2.SelectedItem;
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (Ac1.SelectedItem != null)
+                bank.account = (Account)Ac1.SelectedItem;
+        }
+
+        private void ComboBox_SelectionChanged_2(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (Sc1.SelectedItem != null)
+                bank.Acount1 = (User<Account>)Sc1.SelectedItem;
+        }
+
+        private void ComboBox_SelectionChanged_3(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if (Sc2.SelectedItem != null)
+                bank.Acount = (User<Account>)Sc2.SelectedItem;
+        }
     }
 }

@@ -27,11 +27,25 @@ namespace BankProgect
         /// </summary>
         /// <param name="elem"></param>
         public void Remove(T elem) => Numfers.Remove(elem);
-        public void Translation(T elem, T elem1, float tranzakt)
+        public void Translation(T elem, Calculetion calculetion, float tranzakt)
         {
-            elem.Kech += tranzakt;
-            elem1.Kech -= tranzakt;
+            switch (calculetion)
+            {
+                case Calculetion.Plus:                    
+                    elem.Kech += tranzakt;
+                    break;
+                case Calculetion.Minus:
+                    elem.Kech -= tranzakt;
+                    break;
+                default:
+                    break;
+            }
         }
         public override string ToString() => String.Format("{0}", UserName);
+    }
+    enum Calculetion
+    {
+        Plus,
+        Minus
     }
 }

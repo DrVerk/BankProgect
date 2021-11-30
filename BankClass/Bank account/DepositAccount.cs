@@ -1,21 +1,21 @@
-﻿namespace BankProgect
+﻿using System;
+namespace BankProgect
 {
-    class DepositAccount : Account, IDeposite
+    internal class DepositAccount : Account, IDeposite
     {
         uint _Deposite;
         public uint Deposite { get => _Deposite; set => _Deposite = value; }
         public DepositAccount(float kech, uint bet, uint deposite) :
             base(kech, bet)
-            
         {
             Deposite = deposite;
-            base._Name = "Депозитный";
+            _Name = "Кредит";
         }
         public void Depositev()
         {
 
         }
-
+        public override string ToString() => String.Format("{0} {1}", base.ToString(), Deposite);
     }
     interface IDeposite
     {
