@@ -1,25 +1,19 @@
 ﻿using System;
 namespace BankProgect
 {
-    internal class DepositAccount : Account, IDeposite
+    internal class CreditAccount : Account, IDeposite
     {
-        uint _Deposite;
-        public uint Deposite { get => _Deposite; set => _Deposite = value; }
-        public DepositAccount(float kech, uint bet, uint deposite) :
-            base(kech, bet)
+        uint _LoanRare;
+        public uint LoanRate { get => _LoanRare; set => _LoanRare = value; }
+        public override string ToString() => String.Format("{0} {1}", base.ToString(), LoanRate);
+        public CreditAccount(float kech, uint bet, uint deposite) : base(kech, bet)
         {
-            Deposite = deposite;
+            LoanRate = deposite;
             _Name = "Кредит";
         }
-        public void Depositev()
-        {
-
-        }
-        public override string ToString() => String.Format("{0} {1}", base.ToString(), Deposite);
     }
     interface IDeposite
     {
-        uint Deposite { get; set; }
-        void Depositev();
+        uint LoanRate { get; set; }
     }
 }

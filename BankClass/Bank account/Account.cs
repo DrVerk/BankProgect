@@ -5,36 +5,31 @@ namespace BankProgect
     internal class Account : INumfer
     {
         static Random random;
-        uint _NumNumf;
-        float _Kech;
+        uint _AcNumb;
+        float _Money;
         uint _Bet;
         protected string _Name = "Счет";
+        public string Name { get => _Name; }
+        public uint AcNumf { get => _AcNumb; }
+        public float Money { get => _Money; set { _Money = value; } }
+        public uint Bet { get => _Bet; set { _Bet = value; } }
+        private uint AcNumbGenerator() => Convert.ToUInt32(random.Next());
+        public override string ToString() => String.Format("{0} {1} {2}", Name, AcNumf, Money);
         static Account()
         {
             random = new Random();
         }
         public Account(float kech, uint bet)
         {
-            _Kech = kech;
-            _NumNumf = NumNumfGenerator();
+            _Money = kech;
+            _AcNumb = AcNumbGenerator();
             _Bet = bet;
         }
-        public string Name { get => _Name; }
-        public uint NumNumf { get => _NumNumf; }
-        public float Kech { get => _Kech; set { _Kech = value; } }
-        public uint Bet { get => _Bet; set { _Bet = value; } }
-        private uint NumNumfGenerator()=> Convert.ToUInt32(random.Next());        
-        public void addedKech(float kech)
-        {
-            Kech += kech;
-        }
-        public override string ToString() => String.Format("{0} {1} {2}",Name,NumNumf,Kech);
-       
     }
     interface INumfer
     {
-        uint NumNumf { get; }
-        float Kech { get; }
+        uint AcNumf { get; }
+        float Money { get; }
         uint Bet { get; }
     }
 

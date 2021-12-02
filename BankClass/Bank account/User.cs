@@ -12,6 +12,7 @@ namespace BankProgect
         string _UserName;
         public string UserName { get => _UserName; }
         public ObservableCollection<T> Numfers { get; set; }
+        public override string ToString() => String.Format("{0}", UserName);
         public User(string name)
         {
             _UserName = name;
@@ -31,17 +32,16 @@ namespace BankProgect
         {
             switch (calculetion)
             {
-                case Calculetion.Plus:                    
-                    elem.Kech += tranzakt;
+                case Calculetion.Plus:
+                    elem.Money += tranzakt;
                     break;
                 case Calculetion.Minus:
-                    elem.Kech -= tranzakt;
+                    elem.Money -= tranzakt;
                     break;
                 default:
                     break;
             }
         }
-        public override string ToString() => String.Format("{0}", UserName);
     }
     enum Calculetion
     {

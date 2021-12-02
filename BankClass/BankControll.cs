@@ -10,59 +10,43 @@ namespace BankProgect.BankClass
     {
         #region Система
         #region Строки
-
-        //Вспомогательная строка для названия акаунта
+        //Вспомогательная строка для акаунта
         string _name = "";
+        User<Account> _UsAcount, _Acount1;
+        float _UserMoney;
+        uint _UserBet, _LoanRare;
+        bool _DepOr = true;
+        Account _account, _account1;
         public string name { get => _name; set => Set(ref _name, value); }
         //Вспомогательная строка для переходного акаунта
-        User<Account> _Acount;
-        public User<Account> Acount { get => _Acount; set => Set(ref _Acount, value); }
-        User<Account> _Acount1;
+        public User<Account> Acount { get => _UsAcount; set => Set(ref _UsAcount, value); }
         public User<Account> Acount1 { get => _Acount1; set => Set(ref _Acount1, value); }
-
-        float _kech;
-        public float kech { get => _kech; set => Set(ref _kech, value); }
-
-        uint _bet;
-        public uint bet { get => _bet; set => Set(ref _bet, value); }
-
-        uint _deposite;
-        public uint deposite { get => _deposite; set => Set(ref _deposite, value); }
-
-        bool _DepOr = true;
+        public float UserMoney { get => _UserMoney; set => Set(ref _UserMoney, value); }
+        public uint UserBet { get => _UserBet; set => Set(ref _UserBet, value); }
+        public uint UsLoanRare { get => _LoanRare; set => Set(ref _LoanRare, value); }
         public bool DepOr { get => _DepOr; set => Set(ref _DepOr, value); }
-
-        Account _account;
         public Account account { get => _account; set => Set(ref _account, value); }
-        Account _account1;
         public Account account1 { get => _account1; set => Set(ref _account1, value); }
-
-        #endregion
-        #region Лист полильзовотелей
-        private ObservableCollection<User<Account>> _UserCollection =
-            new ObservableCollection<User<Account>>
-        { new User<Account>("Женя"),
+        ObservableCollection<User<Account>> _UserCollection =
+                    new ObservableCollection<User<Account>>
+                { new User<Account>("Женя"),
             new User<Account>("Миша"),
             new User<Account>("Костя") };
         /// <summary>
         /// Пользователи банка
         /// </summary>
         public ObservableCollection<User<Account>> UserCollection { get => _UserCollection; set => Set(ref _UserCollection, value); }
-        #endregion
-        #region Счета
-        private ObservableCollection<Account> _UserAccount = new ObservableCollection<Account>();
+        ObservableCollection<Account> _UserAccount, _UserAccount1 = new ObservableCollection<Account>();
         /// <summary>
         /// Счета пользователя
         /// </summary>
         public ObservableCollection<Account> UserAccounts { get { return _UserAccount; } set => Set(ref _UserAccount, value); }
-        private ObservableCollection<Account> _UserAccount1 = new ObservableCollection<Account>();
         /// <summary>
         /// Счета пользователя
         /// </summary>
         public ObservableCollection<Account> UserAccounts1 { get { return _UserAccount1; } set => Set(ref _UserAccount1, value); }
         #endregion
         #region Команды
-        #region AddUserCommand
         /// <summary>
         /// Добовляет нового пользователя
         /// </summary>
@@ -72,9 +56,6 @@ namespace BankProgect.BankClass
             UserCollection.Add(new User<Account>(name));
             name = "";
         }
-        private bool CanAddUserCommandExecuted(object p) => true;
-        #endregion
-        #region ClearUserCommand
         /// <summary>
         /// Удоляет выбраного пользователя
         /// </summary>
@@ -87,9 +68,6 @@ namespace BankProgect.BankClass
                 Acount = null;
             }
         }
-        private bool CanClearUserCommandExecuted(object p) => true;
-        #endregion
-        #region CreateAccountCommand
         /// <summary>
         /// Создает новый счет в выделеном акаунте
         /// </summary>
@@ -100,24 +78,46 @@ namespace BankProgect.BankClass
             {
                 if (DepOr)
                 {
-                    if (kech == 0 && bet == 0)
+                    if (UserMoney == 0 && UserBet == 0)
                         Acount.Numfers.Add(new Account(10, 100));
                     else
-                        Acount.Numfers.Add(new Account(kech, bet));
+                        Acount.Numfers.Add(new Account(UserMoney, UserBet));
                 }
                 else
                 {
-                    if (kech == 0 && bet == 0 && deposite == 0)
-                        Acount.Numfers.Add(new DepositAccount(10, 100, 10));
+                    if (UserMoney == 0 && UserBet == 0 && UsLoanRare == 0)
+                        Acount.Numfers.Add(new CreditAccount(10, 100, 10));
                     else
-                        Acount.Numfers.Add(new DepositAccount(kech, bet, deposite));
+                        Acount.Numfers.Add(new CreditAccount(UserMoney, UserBet, UsLoanRare));
                 }
-                kech = 0; bet = 0; deposite = 0;
+                UserMoney = 0; UserBet = 0; UsLoanRare = 0;
             }
         }
-        private bool CanCreateAccountCommandExecuted(object p) => true;
-        #endregion
-        #region BindingAccountCommand
+        /// <summary>
+        /// Вычисление для счетов
+        /// </summary>
+        public ICommand CalculetionAccoundCommand { get; }
+        private void OnCalculetionAccoundCommandExecuted(object p)
+        {
+            if (account != null && account1 != null)
+            {
+                Acount.Translation(account, Calculetion.Minus, UserMoney);
+                Acount.Translation(account1, Calculetion.Plus, UserMoney);
+                UserMoney = 0;
+            }
+        }
+        /// <summary>
+        /// Вычисление для счетов
+        /// </summary>
+        public ICommand CalculetionUserCommand { get; }
+        private void OnCalculetionUserCommandExecuted(object p)
+        {
+            if (account != null)
+            {
+                Acount.Translation(account, Calculetion.Plus, UserMoney);
+                UserMoney = 0;
+            }
+        }
         /// <summary>
         /// Требуется для связи ViewModel с xml
         /// </summary>
@@ -129,60 +129,25 @@ namespace BankProgect.BankClass
             if (Acount1 != null)
                 UserAccounts1 = Acount1.Numfers;
         }
-        private bool CanBindingAccountCommandExecuted(object p) => true;
-        #endregion
-        #region DeleteAccountCommand
         public ICommand DeleteAccountCommand { get; set; }
         private void OnDeleteAccountCommandExecuted(object p)
         {
             if (Acount != null && account != null)
                 Acount.Remove(account);
         }
-        private bool CanDeleteAccountCommandExecuted(object p) => true;
-        #endregion
-        #region CalculetionAccoundCommand
-        /// <summary>
-        /// Вычисление для счетов
-        /// </summary>
-        public ICommand CalculetionAccoundCommand { get; }
-        private void OnCalculetionAccoundCommandExecuted(object p)
-        {
-            if (account != null && account1 != null)
-            {
-                Acount.Translation(account, Calculetion.Minus, kech);
-                Acount.Translation(account1, Calculetion.Plus, kech);
-                kech = 0;
-            }
-        }
-        private bool CanCalculetionAccoundCommandExecuted(object p) => true;
-        #endregion
-        #region CalculetionUserCommand
-        /// <summary>
-        /// Вычисление для счетов
-        /// </summary>
-        public ICommand CalculetionUserCommand { get; }
-        private void OnCalculetionUserCommandExecuted(object p)
-        {
-            if (account != null )
-            {
-                Acount.Translation(account, Calculetion.Plus, kech);
-                kech = 0;
-            }
-        }
-        private bool CanCalculetionUserCommandExecuted(object p) => true;
-        #endregion
+        private bool CanCommandExecuted(object p) => true;
         #endregion
         #endregion
         public BankControll()
         {
             #region РеализацияКоманд
-            AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanAddUserCommandExecuted);
-            ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanClearUserCommandExecuted);
-            BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanBindingAccountCommandExecuted);
-            CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCreateAccountCommandExecuted);
-            DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanDeleteAccountCommandExecuted);
-            CalculetionAccoundCommand = new LambdaCommand(OnCalculetionAccoundCommandExecuted,CanCalculetionAccoundCommandExecuted);
-            CalculetionUserCommand = new LambdaCommand(OnCalculetionUserCommandExecuted,CanCalculetionUserCommandExecuted);
+            AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanCommandExecuted);
+            ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanCommandExecuted);
+            BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanCommandExecuted);
+            CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCommandExecuted);
+            DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanCommandExecuted);
+            CalculetionAccoundCommand = new LambdaCommand(OnCalculetionAccoundCommandExecuted, CanCommandExecuted);
+            CalculetionUserCommand = new LambdaCommand(OnCalculetionUserCommandExecuted, CanCommandExecuted);
             #endregion
         }
     }
