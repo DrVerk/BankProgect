@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using BankProgect.Infrastructure.Commands;
 
@@ -12,21 +11,21 @@ namespace BankProgect.BankClass
         #region Строки
         //Вспомогательная строка для акаунта
         string _name = "";
-        User<Account> _UsAcount, _Acount1;
-        float _UserMoney;
-        uint _UserBet, _LoanRare;
+        User<Account> _userAcount, _userAcount1;
+        float _userMoney;
+        uint _userBet, _userLoanRare;
         bool _DepOr = true;
         Account _account, _account1;
         public string name { get => _name; set => Set(ref _name, value); }
         //Вспомогательная строка для переходного акаунта
-        public User<Account> Acount { get => _UsAcount; set => Set(ref _UsAcount, value); }
-        public User<Account> Acount1 { get => _Acount1; set => Set(ref _Acount1, value); }
-        public float UserMoney { get => _UserMoney; set => Set(ref _UserMoney, value); }
-        public uint UserBet { get => _UserBet; set => Set(ref _UserBet, value); }
-        public uint UsLoanRare { get => _LoanRare; set => Set(ref _LoanRare, value); }
+        public User<Account> UserAcount { get => _userAcount; set => Set(ref _userAcount, value); }
+        public User<Account> UserAcount1 { get => _userAcount1; set => Set(ref _userAcount1, value); }
+        public float UserMoney { get => _userMoney; set => Set(ref _userMoney, value); }
+        public uint UserBet { get => _userBet; set => Set(ref _userBet, value); }
+        public uint UserLoanRare { get => _userLoanRare; set => Set(ref _userLoanRare, value); }
         public bool DepOr { get => _DepOr; set => Set(ref _DepOr, value); }
-        public Account account { get => _account; set => Set(ref _account, value); }
-        public Account account1 { get => _account1; set => Set(ref _account1, value); }
+        public Account Account { get => _account; set => Set(ref _account, value); }
+        public Account Account1 { get => _account1; set => Set(ref _account1, value); }
         ObservableCollection<User<Account>> _UserCollection =
                     new ObservableCollection<User<Account>>
                 { new User<Account>("Женя"),
@@ -62,10 +61,10 @@ namespace BankProgect.BankClass
         public ICommand ClearUserCommand { get; }
         private void OnClearUserCommandExecuted(object p)
         {
-            if (Acount != null)
+            if (UserAcount != null)
             {
-                UserCollection.Remove(Acount);
-                Acount = null;
+                UserCollection.Remove(UserAcount);
+                UserAcount = null;
             }
         }
         /// <summary>
@@ -74,23 +73,23 @@ namespace BankProgect.BankClass
         public ICommand CreateAccountCommand { get; }
         private void OnCreateAccountCommandExecuted(object p)
         {
-            if (Acount != null)
+            if (UserAcount != null)
             {
                 if (DepOr)
                 {
                     if (UserMoney == 0 && UserBet == 0)
-                        Acount.Numfers.Add(new Account(10, 100));
+                        UserAcount.Numfers.Add(new Account(10, 100));
                     else
-                        Acount.Numfers.Add(new Account(UserMoney, UserBet));
+                        UserAcount.Numfers.Add(new Account(UserMoney, UserBet));
                 }
                 else
                 {
-                    if (UserMoney == 0 && UserBet == 0 && UsLoanRare == 0)
-                        Acount.Numfers.Add(new CreditAccount(10, 100, 10));
+                    if (UserMoney == 0 && UserBet == 0 && UserLoanRare == 0)
+                        UserAcount.Numfers.Add(new CreditAccount(10, 100, 10));
                     else
-                        Acount.Numfers.Add(new CreditAccount(UserMoney, UserBet, UsLoanRare));
+                        UserAcount.Numfers.Add(new CreditAccount(UserMoney, UserBet, UserLoanRare));
                 }
-                UserMoney = 0; UserBet = 0; UsLoanRare = 0;
+                UserMoney = 0; UserBet = 0; UserLoanRare = 0;
             }
         }
         /// <summary>
@@ -99,10 +98,10 @@ namespace BankProgect.BankClass
         public ICommand CalculetionAccoundCommand { get; }
         private void OnCalculetionAccoundCommandExecuted(object p)
         {
-            if (account != null && account1 != null)
+            if (Account != null && Account1 != null)
             {
-                Acount.Translation(account, Calculetion.Minus, UserMoney);
-                Acount.Translation(account1, Calculetion.Plus, UserMoney);
+                UserAcount.Translation(Account, Calculetion.Minus, UserMoney);
+                UserAcount.Translation(Account1, Calculetion.Plus, UserMoney);
                 UserMoney = 0;
             }
         }
@@ -112,9 +111,9 @@ namespace BankProgect.BankClass
         public ICommand CalculetionUserCommand { get; }
         private void OnCalculetionUserCommandExecuted(object p)
         {
-            if (account != null)
+            if (Account != null)
             {
-                Acount.Translation(account, Calculetion.Plus, UserMoney);
+                UserAcount.Translation(Account, Calculetion.Plus, UserMoney);
                 UserMoney = 0;
             }
         }
@@ -124,16 +123,16 @@ namespace BankProgect.BankClass
         public ICommand BindingAccountCommand { get; set; }
         private void OnBindingAccountCommandExecuted(object p)
         {
-            if (Acount != null)
-                UserAccounts = Acount.Numfers;
-            if (Acount1 != null)
-                UserAccounts1 = Acount1.Numfers;
+            if (UserAcount != null)
+                UserAccounts = UserAcount.Numfers;
+            if (UserAcount1 != null)
+                UserAccounts1 = UserAcount1.Numfers;
         }
         public ICommand DeleteAccountCommand { get; set; }
         private void OnDeleteAccountCommandExecuted(object p)
         {
-            if (Acount != null && account != null)
-                Acount.Remove(account);
+            if (UserAcount != null && Account != null)
+                UserAcount.Remove(Account);
         }
         private bool CanCommandExecuted(object p) => true;
         #endregion

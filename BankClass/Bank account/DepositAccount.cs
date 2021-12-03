@@ -3,8 +3,11 @@ namespace BankProgect
 {
     internal class CreditAccount : Account, IDeposite
     {
-        uint _LoanRare;
-        public uint LoanRate { get => _LoanRare; set => _LoanRare = value; }
+        uint _loanRare;
+        /// <summary>
+        /// кредитная ставка
+        /// </summary>
+        public uint LoanRate { get => _loanRare; set => _loanRare = value; }
         public override string ToString() => String.Format("{0} {1}", base.ToString(), LoanRate);
         public CreditAccount(float kech, uint bet, uint deposite) : base(kech, bet)
         {

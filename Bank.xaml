@@ -105,7 +105,7 @@
                                 <Button Grid.Column="4" Margin="0,0,37,0" Content="Создать счет" Grid.Row="2" Command="{Binding CreateAccountCommand}"/>
                                 <Button Grid.Column="5"  Content="Удалить счет" Grid.Row="2" Command="{Binding DeleteAccountCommand}"/>
                                 <TextBlock x:Name="dEP" TextWrapping="Wrap" Text="Депозит" Margin="5,0" Grid.Column="3" Visibility="Hidden" />
-                                <TextBox x:Name="pER" TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="3" Visibility="Hidden" Text="{Binding UsLoanRare}" />
+                                <TextBox x:Name="pER" TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="3" Visibility="Hidden" Text="{Binding UserLoanRare}" />
                             </Grid>
                         </TabItem>
                         <TabItem>
@@ -212,7 +212,8 @@
                                Text="Сумма для перевода" VerticalAlignment="Center" Grid.ColumnSpan="3" 
                                Width="248" Height="23" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
                     <TextBox HorizontalAlignment="Center" Height="31" Margin="78,0,0,0" Grid.Row="5"
-                             Text="{Binding UserMoney}" TextWrapping="Wrap" Width="248" Grid.ColumnSpan="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                             Text="{Binding UserMoney}" TextWrapping="Wrap" Width="248" Grid.ColumnSpan="3" 
+                             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </TabItem>
             <TabItem >

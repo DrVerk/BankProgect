@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace BankProgect
 {
     class User<T>
         where T : Account
     {
-        string _UserName;
-        public string UserName { get => _UserName; }
+        string _userName;
+        /// <summary>
+        /// имя пользовотеля
+        /// </summary>
+        public string UserName { get => _userName; }
+        /// <summary>
+        /// колекция счетов
+        /// </summary>
         public ObservableCollection<T> Numfers { get; set; }
         public override string ToString() => String.Format("{0}", UserName);
         public User(string name)
         {
-            _UserName = name;
+            _userName = name;
             Numfers = new ObservableCollection<T>();
         }
         /// <summary>
@@ -28,6 +30,12 @@ namespace BankProgect
         /// </summary>
         /// <param name="elem"></param>
         public void Remove(T elem) => Numfers.Remove(elem);
+        /// <summary>
+        /// перевод между счетами
+        /// </summary>
+        /// <param name="elem">счет</param>
+        /// <param name="calculetion">опирация</param>
+        /// <param name="tranzakt">сумма</param>
         public void Translation(T elem, Calculetion calculetion, float tranzakt)
         {
             switch (calculetion)

@@ -5,32 +5,42 @@ namespace BankProgect
     internal class Account : INumfer
     {
         static Random random;
-        uint _AcNumb;
-        float _Money;
-        uint _Bet;
+        uint _accountNumb, _bet;
+        float _money;
         protected string _Name = "Счет";
+        /// <summary>
+        /// тип счета
+        /// </summary>
         public string Name { get => _Name; }
-        public uint AcNumf { get => _AcNumb; }
-        public float Money { get => _Money; set { _Money = value; } }
-        public uint Bet { get => _Bet; set { _Bet = value; } }
+        /// <summary>
+        /// номер счета
+        /// </summary>
+        public uint AccountNumf { get => _accountNumb; }
+        /// <summary>
+        /// деньги на акаунте
+        /// </summary>
+        public float Money { get => _money; set { _money = value; } }
+        /// <summary>
+        /// процентная ставка
+        /// </summary>
+        public uint Bet { get => _bet; set { _bet = value; } }
         private uint AcNumbGenerator() => Convert.ToUInt32(random.Next());
-        public override string ToString() => String.Format("{0} {1} {2}", Name, AcNumf, Money);
+        public override string ToString() => String.Format("{0} {1} {2}", Name, AccountNumf, Money);
         static Account()
         {
             random = new Random();
         }
         public Account(float kech, uint bet)
         {
-            _Money = kech;
-            _AcNumb = AcNumbGenerator();
-            _Bet = bet;
+            _money = kech;
+            _accountNumb = AcNumbGenerator();
+            _bet = bet;
         }
     }
     interface INumfer
     {
-        uint AcNumf { get; }
+        uint AccountNumf { get; }
         float Money { get; }
         uint Bet { get; }
     }
-
 }
