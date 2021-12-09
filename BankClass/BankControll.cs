@@ -1,12 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows.Threading;
 using BankProgect.Infrastructure.Commands;
+using System;
 
 
 namespace BankProgect.BankClass
 {
     internal class BankControll : ViewModel
     {
+        DispatcherTimer _timer;
         #region Система
         #region Строки
         //Вспомогательная строка для акаунта
@@ -118,10 +121,9 @@ namespace BankProgect.BankClass
             }
         }
         /// <summary>
-        /// Требуется для связи ViewModel с xml
+        /// Обновление списков
         /// </summary>
-        public ICommand BindingAccountCommand { get; set; }
-        private void OnBindingAccountCommandExecuted(object p)
+        private void _BindingAccount(object p, EventArgs e)
         {
             if (UserAcount != null)
                 UserAccounts = UserAcount.Numfers;
@@ -139,10 +141,17 @@ namespace BankProgect.BankClass
         #endregion
         public BankControll()
         {
+            #region Обновление списков
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            _timer.Tick += _BindingAccount;
+            _timer.Start();
+            #endregion
+
             #region РеализацияКоманд
             AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanCommandExecuted);
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanCommandExecuted);
-            BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanCommandExecuted);
+            //BindingAccountCommand = new LambdaCommand(OnBindingAccountCommandExecuted, CanCommandExecuted);
             CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCommandExecuted);
             DeleteAccountCommand = new LambdaCommand(OnDeleteAccountCommandExecuted, CanCommandExecuted);
             CalculetionAccoundCommand = new LambdaCommand(OnCalculetionAccoundCommandExecuted, CanCommandExecuted);

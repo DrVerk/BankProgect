@@ -11,8 +11,12 @@
         <vm:BankControll/>
     </Window.DataContext>
     <Grid>
-        <TabControl HorizontalAlignment="Stretch" 
-                    VerticalAlignment="Stretch" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="691*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="109*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="1" >
             <TabItem  Height="20" 
                      VerticalAlignment="Bottom">
                 <TabItem.Header>
@@ -21,6 +25,7 @@
                         <TextBlock Text="Создание Системы" Margin="5,0,0,0"/>
                     </StackPanel>
                 </TabItem.Header>
+
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15*"/>
@@ -28,12 +33,14 @@
                         <RowDefinition Height="5*"/>
                         <RowDefinition Height="1.2*"/>
                     </Grid.RowDefinitions>
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="148*"/>
                         <ColumnDefinition Width="243*"/>
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition Width="390*"/>
                     </Grid.ColumnDefinitions>
+
                     <TreeView HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
                               Grid.Column="0" 
@@ -48,12 +55,15 @@
                             </DataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
+
                     <GridSplitter Grid.Column="2" 
                                   HorizontalAlignment="Stretch"
                                   Grid.RowSpan="1" VerticalAlignment="Stretch" />
+
                     <GridSplitter Grid.Row="1" 
                                   HorizontalAlignment="Stretch"
                                   Grid.ColumnSpan="4" VerticalAlignment="Stretch" />
+
                     <TreeView Grid.Column="3"                               
                               HorizontalAlignment="Stretch"  x:Name="AccountsView"
                               VerticalAlignment="Stretch" ItemsSource="{Binding UserAccounts}"
@@ -69,6 +79,7 @@
                             </DataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
+
                     <TabControl Grid.Row="2" Grid.ColumnSpan="4"                                 
                                     HorizontalAlignment="Stretch"                                
                                     VerticalAlignment="Stretch">
@@ -94,8 +105,6 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <Button  Grid.Column="6" Grid.Row="0"
-                                         Content="Загрузить Счета" Command="{Binding BindingAccountCommand}"/>
                                 <TextBlock TextWrapping="Wrap" Text="Деньги" Margin="5,0" Grid.Column="1"  />
                                 <TextBox TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="1" Text="{Binding UserMoney}"/>
                                 <TextBlock TextWrapping="Wrap"  Grid.Column="2"  Margin="5,0" Text="Ставка"></TextBlock>
@@ -164,55 +173,47 @@
                         <RowDefinition Height="10*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="10*"/>
-                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="166*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="133*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="166*"/>
+                        <ColumnDefinition Width="166*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" 
-                               Margin="1,26,1,6"
-                               Text="C которого переводим" VerticalAlignment="Center" FontSize="18"/>
-                    <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  x:Name="Sc2"
-                              Grid.Row="1" ItemsSource="{Binding UserCollection}" SelectionChanged="ComboBox_SelectionChanged_3"/>
+                               Margin="0,39,0,0"
+                               Text="C которого переводим" VerticalAlignment="Top" FontSize="18"/>
+                    <ComboBox  x:Name="Sc2" ItemsSource="{Binding UserCollection}" SelectionChanged="ComboBox_SelectionChanged_3" Margin="0,81,0,32" Grid.RowSpan="3"/>
                     <TextBlock HorizontalAlignment="Center" 
-                               Margin="77,5,76,27"
+                               Margin="0,9,0,0"
                                Text="Счет" 
-                               VerticalAlignment="Center" 
+                               VerticalAlignment="Top" 
                                FontSize="18" Grid.Row="2" Grid.RowSpan="2" />
-                    <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch"  x:Name="Ac1"
-                              Grid.Row="3" ItemsSource="{Binding UserAccounts}" 
-                              SelectionChanged="ComboBox_SelectionChanged_1" />
+                    <ComboBox  x:Name="Ac1"
+                              Grid.Row="2" ItemsSource="{Binding UserAccounts}" 
+                              SelectionChanged="ComboBox_SelectionChanged_1" Margin="0,32,0,32" Grid.RowSpan="3" />
 
-                    <TextBlock HorizontalAlignment="Center" 
-                               Margin="1,26,0,6"
-                               Text="На которыйпереводим" VerticalAlignment="Center" FontSize="18"
-                               Grid.Column="2"/>
-                    <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch" x:Name="Sc1" 
-                              Grid.Row="1" Grid.Column="2" ItemsSource="{Binding UserCollection}" SelectionChanged="ComboBox_SelectionChanged_2"/>
-                    <TextBlock HorizontalAlignment="Center" 
-                               Margin="77,5,76,27"
+                    <TextBlock HorizontalAlignment="Left" 
+                               Margin="5,39,0,0"
+                               Text="На которыйпереводим" VerticalAlignment="Top" FontSize="18"
+                               Grid.Column="1" Grid.ColumnSpan="4"/>
+                    <ComboBox x:Name="Sc1" Grid.Column="2" ItemsSource="{Binding UserCollection}" SelectionChanged="ComboBox_SelectionChanged_2" Grid.ColumnSpan="3" Margin="0,81,166,32" Grid.RowSpan="3"/>
+                    <TextBlock HorizontalAlignment="Left" 
+                               Margin="64,9,0,0"
                                Text="Счет" 
-                               VerticalAlignment="Center" 
+                               VerticalAlignment="Top" 
                                FontSize="18" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2"/>
-                    <ComboBox HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch" x:Name="Ac2" 
-                              Grid.Row="3" Grid.Column="2"  ItemsSource="{Binding UserAccounts1}" 
-                              SelectionChanged="ComboBox_SelectionChanged"/>
-                    <Button Content="Перевести" Grid.Column="3"
-                            HorizontalAlignment="Stretch"  
-                            Grid.Row="4" VerticalAlignment="Stretch"
-                            Command="{Binding CalculetionAccoundCommand}"/>
-                    <Button  Grid.Column="6" Grid.Row="1"
-                                         Content="Загрузить Счета" Command="{Binding BindingAccountCommand}"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="78,8,0,0" Grid.Row="4" TextWrapping="Wrap" 
-                               Text="Сумма для перевода" VerticalAlignment="Center" Grid.ColumnSpan="3" 
+                    <ComboBox x:Name="Ac2" 
+                              Grid.Row="2" Grid.Column="2"  ItemsSource="{Binding UserAccounts1}" 
+                              SelectionChanged="ComboBox_SelectionChanged" Grid.ColumnSpan="3" Margin="0,32,166,32" Grid.RowSpan="3"/>
+                    <Button Content="Перевести" Grid.Column="4"  
+                            Grid.Row="4"
+                            Command="{Binding CalculetionAccoundCommand}" Grid.ColumnSpan="2" Margin="0,0,166,0"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="78,9,0,0" Grid.Row="4" TextWrapping="Wrap" 
+                               Text="Сумма для перевода" VerticalAlignment="Top" Grid.ColumnSpan="4" 
                                Width="248" Height="23" UseLayoutRounding="False" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
-                    <TextBox HorizontalAlignment="Center" Height="31" Margin="78,0,0,0" Grid.Row="5"
-                             Text="{Binding UserMoney}" TextWrapping="Wrap" Width="248" Grid.ColumnSpan="3" 
+                    <TextBox HorizontalAlignment="Left" Height="31" Margin="89,1,0,1" Grid.Row="5"
+                             Text="{Binding UserMoney}" TextWrapping="Wrap" Width="248" Grid.ColumnSpan="4" 
                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 </Grid>
             </TabItem>
@@ -240,7 +241,7 @@
                         <ColumnDefinition Width="10*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock HorizontalAlignment="Center" 
-                               Margin="21,26,21,6"
+                               
                                Text="Акаунт для пополнения" VerticalAlignment="Center" FontSize="18" Grid.Column="1"/>
                     <ComboBox x:Name="UsCombo" HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch" SelectionChanged="ComboBox_UserChanged" 
@@ -248,20 +249,36 @@
                     <TextBlock HorizontalAlignment="Center"                                
                                Text="Счет" 
                                VerticalAlignment="Center" 
-                               FontSize="18" Grid.Row="2" Grid.Column="1" Margin="100,7,99,6" />
+                               FontSize="18" Grid.Row="2" Grid.Column="1" Margin="0,7" />
                     <ComboBox x:Name="AcCombo" HorizontalAlignment="Stretch" SelectionChanged="AcCombo_SelectionChanged"
                               VerticalAlignment="Stretch" ItemsSource="{Binding UserAccounts}"  
                               Grid.Row="3" Grid.Column="1"/>
-                    <TextBlock  TextWrapping="Wrap" Text="Деньги для зачисления" Grid.Column="1"  Grid.Row="4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,4" Width="238" />
+                    <TextBlock  TextWrapping="Wrap" Text="Деньги для зачисления" Grid.Column="1"  Grid.Row="4" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
                     <TextBox  TextWrapping="Wrap" Grid.Column="1"
                               Text="{Binding UserMoney}" Grid.Row="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                     <Button Grid.Column="2" Grid.Row="5" Content="Зачислить"
                             Command="{Binding CalculetionUserCommand}"/>
-                    <Button  Grid.Column="6" Grid.Row="1"
-                                         Content="Загрузить Счета" Command="{Binding BindingAccountCommand}"/>
-
                 </Grid>
             </TabItem>
         </TabControl>
+        <Expander Grid.Column="2" ExpandDirection="Down" >
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal">                   
+                    <iconPacks:PackIconFontAwesome Kind="AdSolid"/>
+                    <TextBlock Text="Архив действий"/>
+                </StackPanel>
+            </Expander.Header>
+
+            <Grid Background="#FFE5E5E5">                
+                <ListBox >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Expander>
+        <GridSplitter Grid.Column="1" Background="#FFE2DFDF" HorizontalAlignment="Stretch"/>
     </Grid>
 </Window>

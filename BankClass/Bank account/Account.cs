@@ -4,7 +4,7 @@ namespace BankProgect
 {
     internal class Account : INumfer
     {
-        static Random random;
+        static Random s_random;
         uint _accountNumb, _bet;
         float _money;
         protected string _Name = "Счет";
@@ -24,11 +24,11 @@ namespace BankProgect
         /// процентная ставка
         /// </summary>
         public uint Bet { get => _bet; set { _bet = value; } }
-        private uint AcNumbGenerator() => Convert.ToUInt32(random.Next());
+        private uint AcNumbGenerator() => Convert.ToUInt32(s_random.Next());
         public override string ToString() => String.Format("{0} {1} {2}", Name, AccountNumf, Money);
         static Account()
         {
-            random = new Random();
+            s_random = new Random();
         }
         public Account(float kech, uint bet)
         {
