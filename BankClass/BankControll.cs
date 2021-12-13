@@ -19,6 +19,7 @@ namespace BankProgect.BankClass
         uint _userBet, _userLoanRare;
         bool _DepOr = true;
         Account _account, _account1;
+        ObservableCollection<string> _UserIventer;
         public string name { get => _name; set => Set(ref _name, value); }
         //Вспомогательная строка для переходного акаунта
         public User<Account> UserAcount { get => _userAcount; set => Set(ref _userAcount, value); }
@@ -47,6 +48,7 @@ namespace BankProgect.BankClass
         /// Счета пользователя
         /// </summary>
         public ObservableCollection<Account> UserAccounts1 { get { return _UserAccount1; } set => Set(ref _UserAccount1, value); }
+        public ObservableCollection<string> UserIventer { get => _UserIventer; set => Set(ref _UserIventer, value); }
         #endregion
         #region Команды
         /// <summary>
@@ -141,13 +143,14 @@ namespace BankProgect.BankClass
         #endregion
         public BankControll()
         {
+            User<Account>.UserEvents += e => UserIventer.Add(e);
             #region Обновление списков
             _timer = new DispatcherTimer();
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             _timer.Tick += _BindingAccount;
             _timer.Start();
             #endregion
-
+           
             #region РеализацияКоманд
             AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanCommandExecuted);
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanCommandExecuted);

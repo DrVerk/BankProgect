@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+
 namespace BankProgect
 {
     class User<T>
         where T : Account
     {
+        public static event Action<string> UserEvents;
         string _userName;
         /// <summary>
         /// имя пользовотеля
@@ -19,17 +22,28 @@ namespace BankProgect
         {
             _userName = name;
             Numfers = new ObservableCollection<T>();
+            UserEvents($"Пользователь {UserName} был создан");
+            //Account.CreateAccount += 
         }
         /// <summary>
         /// Добовление в масив
         /// </summary>
         /// <param name="elem"></param>
-        public void Add(T elem) => Numfers.Add(elem);
+        public void Add(T elem)
+        {
+            Numfers.Add(elem);
+            //elem.CreateAccount+=e => UserEvents($"Пользователь {UserName} {e}");
+            UserEvents($"Пользователь {UserName} {elem}");
+        }
         /// <summary>
         /// удоление элемента из списка
         /// </summary>
         /// <param name="elem"></param>
-        public void Remove(T elem) => Numfers.Remove(elem);
+        public void Remove(T elem)
+        {
+            Numfers.Remove(elem);
+            UserEvents($"Пользователь {UserName} удалил {elem.Name} с номером{elem.AccountNumf}");
+        }
         /// <summary>
         /// перевод между счетами
         /// </summary>
@@ -42,9 +56,11 @@ namespace BankProgect
             {
                 case Calculetion.Plus:
                     elem.Money += tranzakt;
+                    UserEvents($"Пользователь {UserName} перевел на {elem.Name} с номером{elem.AccountNumf} сумму {tranzakt}");
                     break;
                 case Calculetion.Minus:
                     elem.Money -= tranzakt;
+                    UserEvents($"Пользователь {UserName} перевел c {elem.Name} с номером{elem.AccountNumf} сумму {tranzakt}");
                     break;
                 default:
                     break;

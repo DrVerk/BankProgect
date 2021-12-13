@@ -4,6 +4,7 @@ namespace BankProgect
 {
     internal class Account : INumfer
     {
+        public static event Action<string> CreateAccount;
         static Random s_random;
         uint _accountNumb, _bet;
         float _money;
@@ -35,6 +36,7 @@ namespace BankProgect
             _money = kech;
             _accountNumb = AcNumbGenerator();
             _bet = bet;
+            CreateAccount($"{_Name} создан с номером {AccountNumf} ссумой {Money} и ставкой {Bet}");
         }
     }
     interface INumfer
