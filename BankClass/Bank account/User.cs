@@ -34,7 +34,7 @@ namespace BankProgect
         {
             Numfers.Add(elem);
             //Account.CreateAccount += e => UserEvents($"Пользователь {UserName} {e}");
-            UserEvents($"Пользователь {UserName} {elem}");
+            UserEvents($"Пользователь {UserName} создал {elem}");
         }
         /// <summary>
         /// удоление элемента из списка
