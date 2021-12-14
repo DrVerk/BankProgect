@@ -21,6 +21,7 @@ namespace BankProgect
         public User(string name)
         {
             _userName = name;
+           UserEvents += e => Debug.WriteLine(e);
             Numfers = new ObservableCollection<T>();
             UserEvents($"Пользователь {UserName} был создан");
             //Account.CreateAccount += 
@@ -32,7 +33,7 @@ namespace BankProgect
         public void Add(T elem)
         {
             Numfers.Add(elem);
-            //elem.CreateAccount+=e => UserEvents($"Пользователь {UserName} {e}");
+            //Account.CreateAccount += e => UserEvents($"Пользователь {UserName} {e}");
             UserEvents($"Пользователь {UserName} {elem}");
         }
         /// <summary>
@@ -56,16 +57,17 @@ namespace BankProgect
             {
                 case Calculetion.Plus:
                     elem.Money += tranzakt;
-                    UserEvents($"Пользователь {UserName} перевел на {elem.Name} с номером{elem.AccountNumf} сумму {tranzakt}");
+                    UserEvents($"Пользователь {UserName} перевел на {elem.Name} с номером {elem.AccountNumf} сумму {tranzakt}");
                     break;
                 case Calculetion.Minus:
                     elem.Money -= tranzakt;
-                    UserEvents($"Пользователь {UserName} перевел c {elem.Name} с номером{elem.AccountNumf} сумму {tranzakt}");
+                    UserEvents($"Пользователь {UserName} перевел c {elem.Name} с номером {elem.AccountNumf} сумму {tranzakt}");
                     break;
                 default:
                     break;
             }
         }
+        public void RemuveAccount() => UserEvents($"Пользовотель {UserName} удалил свой акаунт");
     }
     enum Calculetion
     {

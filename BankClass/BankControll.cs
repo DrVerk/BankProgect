@@ -19,7 +19,7 @@ namespace BankProgect.BankClass
         uint _userBet, _userLoanRare;
         bool _DepOr = true;
         Account _account, _account1;
-        ObservableCollection<string> _UserIventer;
+        ObservableCollection<string> _UserIventer = new ObservableCollection<string>();
         public string name { get => _name; set => Set(ref _name, value); }
         //Вспомогательная строка для переходного акаунта
         public User<Account> UserAcount { get => _userAcount; set => Set(ref _userAcount, value); }
@@ -68,6 +68,7 @@ namespace BankProgect.BankClass
         {
             if (UserAcount != null)
             {
+                UserAcount.RemuveAccount();
                 UserCollection.Remove(UserAcount);
                 UserAcount = null;
             }
@@ -83,16 +84,16 @@ namespace BankProgect.BankClass
                 if (DepOr)
                 {
                     if (UserMoney == 0 && UserBet == 0)
-                        UserAcount.Numfers.Add(new Account(10, 100));
+                        UserAcount.Add(new Account(10, 100));
                     else
-                        UserAcount.Numfers.Add(new Account(UserMoney, UserBet));
+                        UserAcount.Add(new Account(UserMoney, UserBet));
                 }
                 else
                 {
                     if (UserMoney == 0 && UserBet == 0 && UserLoanRare == 0)
-                        UserAcount.Numfers.Add(new CreditAccount(10, 100, 10));
+                        UserAcount.Add(new CreditAccount(10, 100, 10));
                     else
-                        UserAcount.Numfers.Add(new CreditAccount(UserMoney, UserBet, UserLoanRare));
+                        UserAcount.Add(new CreditAccount(UserMoney, UserBet, UserLoanRare));
                 }
                 UserMoney = 0; UserBet = 0; UserLoanRare = 0;
             }
@@ -150,7 +151,7 @@ namespace BankProgect.BankClass
             _timer.Tick += _BindingAccount;
             _timer.Start();
             #endregion
-           
+
             #region РеализацияКоманд
             AddUserCommand = new LambdaCommand(OnAddUserCommandExecuted, CanCommandExecuted);
             ClearUserCommand = new LambdaCommand(OnClearUserCommandExecuted, CanCommandExecuted);

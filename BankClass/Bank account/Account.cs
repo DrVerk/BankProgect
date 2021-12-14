@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace BankProgect
 {
@@ -30,12 +31,14 @@ namespace BankProgect
         static Account()
         {
             s_random = new Random();
+            CreateAccount+= e=> Debug.WriteLine(e);
         }
         public Account(float kech, uint bet)
         {
             _money = kech;
             _accountNumb = AcNumbGenerator();
             _bet = bet;
+             
             CreateAccount($"{_Name} создан с номером {AccountNumf} ссумой {Money} и ставкой {Bet}");
         }
     }

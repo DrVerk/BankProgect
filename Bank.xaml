@@ -263,14 +263,14 @@
         </TabControl>
         <Expander Grid.Column="2" ExpandDirection="Down" >
             <Expander.Header>
-                <StackPanel Orientation="Horizontal">                   
+                <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconFontAwesome Kind="AdSolid"/>
                     <TextBlock Text="Архив действий"/>
                 </StackPanel>
             </Expander.Header>
 
             <Grid Background="#FFE5E5E5">
-                <ListBox BindingGroup="{Binding UserIventer}"/>                
+                <ListBox ItemsSource="{Binding UserIventer}"/>
             </Grid>
         </Expander>
         <GridSplitter Grid.Column="1" Background="#FFE2DFDF" HorizontalAlignment="Stretch"/>
