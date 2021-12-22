@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using BankProgect.BankClass;
+using BankLibrary;
+using BankUserLibrary;
 
 namespace BankProgect
 {

@@ -189,14 +189,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BankClass\Bank account\DepositAccount.cs" />
-    <Compile Include="BankClass\BankControll.cs" />
     <Compile Include="BindableSelectedItemBehavior.cs" />
-    <Compile Include="BankClass\Bank account\User.cs" />
-    <Compile Include="BankClass\Bank account\Account.cs" />
-    <Compile Include="BankClass\Base\ViewModel.cs" />
-    <Compile Include="Infrastructure\Commands\Base\Command.cs" />
-    <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -234,6 +227,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankUserLibrary\BankUserLibrary.csproj">
+      <Project>{97511469-54b1-4977-adae-41edbcf8dd3c}</Project>
+      <Name>BankUserLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassLibrary2\ClassLibrary2.csproj">
+      <Project>{3398f43b-c7e2-4b0f-8c19-e66e476b9cfd}</Project>
+      <Name>ClassLibrary2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

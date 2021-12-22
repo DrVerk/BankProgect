@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm ="clr-namespace:BankProgect.BankClass"
+        xmlns:vm ="clr-namespace:BankUserLibrary;assembly=BankUserLibrary"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
         Title="Банковская система" Height="450" Width="800">
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:BankControll/>
-    </Window.DataContext>
+    </Window.DataContext>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="691*"/>
@@ -60,9 +60,7 @@
                                   HorizontalAlignment="Stretch"
                                   Grid.RowSpan="1" VerticalAlignment="Stretch" />
 
-                    <GridSplitter Grid.Row="1" 
-                                  HorizontalAlignment="Stretch"
-                                  Grid.ColumnSpan="4" VerticalAlignment="Stretch" />
+                   
 
                     <TreeView Grid.Column="3"                               
                               HorizontalAlignment="Stretch"  x:Name="AccountsView"
@@ -105,13 +103,13 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock TextWrapping="Wrap" Text="Деньги" Margin="5,0" Grid.Column="1"  />
-                                <TextBox TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="1" Text="{Binding UserMoney}"/>
-                                <TextBlock TextWrapping="Wrap"  Grid.Column="2"  Margin="5,0" Text="Ставка"></TextBlock>
-                                <TextBox TextWrapping="Wrap" Grid.Column="2"  Grid.Row="1" Margin="5,0" Text="{Binding UserBet}"/>
+                                <TextBlock MaxHeight="20" MinHeight="20" TextWrapping="Wrap" Text="Деньги" Margin="5,0" Grid.Column="1"  />
+                                <TextBox TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="1" Text="{Binding UserMoney}" MaxHeight="20" MinHeight="20"/>
+                                <TextBlock MaxHeight="20" MinHeight="20" TextWrapping="Wrap"  Grid.Column="2"  Margin="5,0" Text="Ставка"></TextBlock>
+                                <TextBox TextWrapping="Wrap" Grid.Column="2"  Grid.Row="1" Margin="5,0" Text="{Binding UserBet}" MaxHeight="20" MinHeight="20"/>
                                 <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="Тип акаунта Счет или Кредит" Grid.Column="1" Margin="0" HorizontalAlignment="Center"/>
                                 <CheckBox  Grid.Row="2" Grid.Column="3" Margin="0,0,70,0" Click="CheckBox_Checked"/>
-                                <Button Grid.Column="4" Margin="0,0,37,0" Content="Создать счет" Grid.Row="2" Command="{Binding CreateAccountCommand}"/>
+                                <Button MaxHeight="20" MinHeight="20" Grid.Column="4" Margin="0,0,37,0" Content="Создать счет" Grid.Row="2" Command="{Binding CreateAccountCommand}"/>
                                 <Button Grid.Column="5"  Content="Удалить счет" Grid.Row="2" Command="{Binding DeleteAccountCommand}"/>
                                 <TextBlock x:Name="dEP" TextWrapping="Wrap" Text="Депозит" Margin="5,0" Grid.Column="3" Visibility="Hidden" />
                                 <TextBox x:Name="pER" TextWrapping="Wrap"   Grid.Row="1" Margin="5,0" Grid.Column="3" Visibility="Hidden" Text="{Binding UserLoanRare}" />
