@@ -189,7 +189,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindableSelectedItemBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -229,13 +228,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BankUserLibrary\BankUserLibrary.csproj">
-      <Project>{97511469-54b1-4977-adae-41edbcf8dd3c}</Project>
-      <Name>BankUserLibrary</Name>
+    <ProjectReference Include="AccountClassLibrary\AccountClassLibrary.csproj">
+      <Project>{0e60d8d5-fb10-4e1f-8803-18b63de295f8}</Project>
+      <Name>AccountClassLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ClassLibrary2\ClassLibrary2.csproj">
-      <Project>{3398f43b-c7e2-4b0f-8c19-e66e476b9cfd}</Project>
-      <Name>ClassLibrary2</Name>
+    <ProjectReference Include="BankUser\BankUser.csproj">
+      <Project>{b9ed616f-87e4-46fd-85e5-a15d79a02db6}</Project>
+      <Name>BankUser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
