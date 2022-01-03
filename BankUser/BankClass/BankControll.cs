@@ -78,44 +78,40 @@ namespace BankUserLibrary
         /// </summary>
         public ICommand CreateAccountCommand
         {
-            get
-            {
-                try
-                {
-                    return CreateAccountCommand;
-                }
-                catch (UserExeption)
-                {
-
-                    throw;
-                }
-            }
-            set => CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCommandExecuted);
-
+            get;
         }
+
         private void OnCreateAccountCommandExecuted(object p)
         {
-            if (UserAcount != null)
+            try
             {
-                if (DepOr)
+                if (UserAcount != null)
                 {
-                    if (UserMoney == 0 && UserBet == 0)
-                        UserAcount.Add(new Account(10, 100));
-                    else if (UserMoney < 0) throw new UserExeption("Создание счета с отрицательным болансом не возможно!");
+                    if (DepOr)
+                    {
+                        if (UserMoney == 0 && UserBet == 0)
+                            UserAcount.Add(new Account(10, 100));
+                        else if (UserMoney < 0)
+                            throw new UserExeption("Создание счета с отрицательным болансом не возможно!");
+                        else
+                            UserAcount.Add(new Account(UserMoney, UserBet));
+                    }
                     else
-                        UserAcount.Add(new Account(UserMoney, UserBet));
-
+                    {
+                        if (UserMoney == 0 && UserBet == 0 && UserLoanRare == 0)
+                            UserAcount.Add(new CreditAccount(10, 100, 10));
+                        else if (UserMoney < 0)
+                            throw new UserExeption("Создание Кредита с отрицательным болансом не возможно!");
+                        else
+                            UserAcount.Add(new CreditAccount(UserMoney, UserBet, UserLoanRare));
+                    }
                 }
-                else
-                {
-                    if (UserMoney == 0 && UserBet == 0 && UserLoanRare == 0)
-                        UserAcount.Add(new CreditAccount(10, 100, 10));
-                    else if (UserMoney < 0) throw new UserExeption("Создание Кредита с отрицательным болансом не возможно!");
-                    else
-                        UserAcount.Add(new CreditAccount(UserMoney, UserBet, UserLoanRare));
-                }
-                UserMoney = 0; UserBet = 0; UserLoanRare = 0;
             }
+            catch (UserExeption)
+            {
+                UserIventer.Add("Счет или кредит не был создан");
+            }
+            UserMoney = 0; UserBet = 0; UserLoanRare = 0;
         }
         /// <summary>
         /// Вычисление для счетов
