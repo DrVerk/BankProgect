@@ -76,7 +76,23 @@ namespace BankUserLibrary
         /// <summary>
         /// Создает новый счет в выделеном акаунте
         /// </summary>
-        public ICommand CreateAccountCommand { get; }
+        public ICommand CreateAccountCommand
+        {
+            get
+            {
+                try
+                {
+                    return CreateAccountCommand;
+                }
+                catch (UserExeption)
+                {
+
+                    throw;
+                }
+            }
+            set => CreateAccountCommand = new LambdaCommand(OnCreateAccountCommandExecuted, CanCommandExecuted);
+
+        }
         private void OnCreateAccountCommandExecuted(object p)
         {
             if (UserAcount != null)
@@ -85,13 +101,16 @@ namespace BankUserLibrary
                 {
                     if (UserMoney == 0 && UserBet == 0)
                         UserAcount.Add(new Account(10, 100));
+                    else if (UserMoney < 0) throw new UserExeption("Создание счета с отрицательным болансом не возможно!");
                     else
                         UserAcount.Add(new Account(UserMoney, UserBet));
+
                 }
                 else
                 {
                     if (UserMoney == 0 && UserBet == 0 && UserLoanRare == 0)
                         UserAcount.Add(new CreditAccount(10, 100, 10));
+                    else if (UserMoney < 0) throw new UserExeption("Создание Кредита с отрицательным болансом не возможно!");
                     else
                         UserAcount.Add(new CreditAccount(UserMoney, UserBet, UserLoanRare));
                 }

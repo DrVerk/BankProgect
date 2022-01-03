@@ -37,6 +37,7 @@ namespace BankProgect
                 pER.Visibility = Visibility.Hidden;
                 dEP.Visibility = Visibility.Hidden;
             }
+
         }
         private void ComboBox_UserChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -68,5 +69,6 @@ namespace BankProgect
             if (Sc2.SelectedItem != null)
                 bank.UserAcount = (User<Account>)Sc2.SelectedItem;
         }
+
     }
 }

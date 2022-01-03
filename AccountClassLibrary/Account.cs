@@ -5,7 +5,6 @@ namespace BankLibrary
 {
     public class Account : INumfer
     {
-        public static event Action<string> CreateAccount;
         static Random s_random;
         uint _accountNumb, _bet;
         float _money;
@@ -31,19 +30,16 @@ namespace BankLibrary
         static Account()
         {
             s_random = new Random();
-            CreateAccount+= e=> Debug.WriteLine(e);
         }
         public Account(float kech, uint bet)
         {
             _money = kech;
             _accountNumb = AcNumbGenerator();
             _bet = bet;
-             
-            CreateAccount($"{_Name} создан с номером {AccountNumf} ссумой {Money} и ставкой {Bet}");
         }
-        public static Account operator +(Account x,float y)
+        public static Account operator +(Account x, float y)
         {
-            x.Money+=y;
+            x.Money += y;
             return x;
         }
     }

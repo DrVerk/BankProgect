@@ -24,8 +24,9 @@ namespace BankLibrary
             UserEvents += e => Debug.WriteLine(e);
             Numfers = new ObservableCollection<T>();
             UserEvents($"Пользователь {UserName} был создан");
-            //Account.CreateAccount += 
+            //Account.CreateAccount += Information;
         }
+       // void Information(string inf) => UserEvents(inf);
         /// <summary>
         /// Добовление в масив
         /// </summary>
