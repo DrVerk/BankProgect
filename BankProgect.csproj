@@ -189,6 +189,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SQLSistemClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

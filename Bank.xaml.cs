@@ -25,6 +25,7 @@ namespace BankProgect
         }
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+
             if (bank.DepOr)
             {
                 bank.DepOr = false;

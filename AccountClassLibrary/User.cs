@@ -26,7 +26,7 @@ namespace BankLibrary
             UserEvents($"Пользователь {UserName} был создан");
             //Account.CreateAccount += Information;
         }
-       // void Information(string inf) => UserEvents(inf);
+        // void Information(string inf) => UserEvents(inf);
         /// <summary>
         /// Добовление в масив
         /// </summary>
@@ -34,7 +34,6 @@ namespace BankLibrary
         public void Add(T elem)
         {
             Numfers.Add(elem);
-            //Account.CreateAccount += e => UserEvents($"Пользователь {UserName} {e}");
             UserEvents($"Пользователь {UserName} создал {elem.Name} с номером {elem.AccountNumf} ссумой {elem.Money} и ставкой {elem.Bet}");
         }
         /// <summary>
@@ -64,13 +63,11 @@ namespace BankLibrary
                     elem.Money -= tranzakt;
                     UserEvents($"Пользователь {UserName} перевел c {elem.Name} с номером {elem.AccountNumf} сумму {tranzakt}");
                     break;
-                default:
-                    break;
             }
         }
         public void RemuveAccount() => UserEvents($"Пользовотель {UserName} удалил свой акаунт");
     }
-   public enum Calculetion
+    public enum Calculetion
     {
         Plus,
         Minus

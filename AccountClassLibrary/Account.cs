@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-
 namespace BankLibrary
 {
     public class Account : INumfer
@@ -31,7 +29,7 @@ namespace BankLibrary
         {
             s_random = new Random();
         }
-        public Account(float kech, uint bet)
+        public Account(float kech = 100, uint bet = 10)
         {
             _money = kech;
             _accountNumb = AcNumbGenerator();
@@ -41,6 +39,16 @@ namespace BankLibrary
         {
             x.Money += y;
             return x;
+        }
+    }
+    public static class AccountFier
+    {
+        public static bool IsIterect(this Account Ac, float Kec)
+        {
+            if (Ac.Money - Kec >= 0)
+                return true;
+            else
+                return false;
         }
     }
     interface INumfer

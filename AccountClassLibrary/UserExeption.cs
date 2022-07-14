@@ -4,9 +4,12 @@ namespace BankLibrary
 {
     public class UserExeption : Exception
     {
-        public UserExeption(string s) : base(s)
+        public UserExeption(string s, bool mes = true) : base(s)
         {
-            MessageBox.Show(s);
+            if (mes)
+                MessageBox.Show(s, "Ошиба", MessageBoxButton.OK, MessageBoxImage.Error);
+            else
+                MessageBox.Show(s, "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

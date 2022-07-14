@@ -20,6 +20,12 @@ namespace BankUserLibrary
         bool _DepOr = true;
         Account _account, _account1;
         ObservableCollection<string> _UserIventer = new ObservableCollection<string>();
+        ObservableCollection<Account> _UserAccount, _UserAccount1 = new ObservableCollection<Account>();
+        ObservableCollection<User<Account>> _UserCollection =
+                    new ObservableCollection<User<Account>>
+                { new User<Account>("Женя"),
+            new User<Account>("Миша"),
+            new User<Account>("Костя") };
         public string name { get => _name; set => Set(ref _name, value); }
         //Вспомогательная строка для переходного акаунта
         public User<Account> UserAcount { get => _userAcount; set => Set(ref _userAcount, value); }
@@ -30,16 +36,12 @@ namespace BankUserLibrary
         public bool DepOr { get => _DepOr; set => Set(ref _DepOr, value); }
         public Account Account { get => _account; set => Set(ref _account, value); }
         public Account Account1 { get => _account1; set => Set(ref _account1, value); }
-        ObservableCollection<User<Account>> _UserCollection =
-                    new ObservableCollection<User<Account>>
-                { new User<Account>("Женя"),
-            new User<Account>("Миша"),
-            new User<Account>("Костя") };
+
         /// <summary>
         /// Пользователи банка
         /// </summary>
         public ObservableCollection<User<Account>> UserCollection { get => _UserCollection; set => Set(ref _UserCollection, value); }
-        ObservableCollection<Account> _UserAccount, _UserAccount1 = new ObservableCollection<Account>();
+
         /// <summary>
         /// Счета пользователя
         /// </summary>
@@ -57,8 +59,22 @@ namespace BankUserLibrary
         public ICommand AddUserCommand { get; }
         private void OnAddUserCommandExecuted(object p)
         {
-            UserCollection.Add(new User<Account>(name));
-            name = "";
+            try
+            {
+                if (name != "")
+                {
+                    UserCollection.Add(new User<Account>(name));
+                    name = "";
+                }
+                else
+                    throw new UserExeption("Пользовотель без имени не может быть создан!");
+            }
+            catch (Exception)
+            {
+
+                UserIventer.Add("Пользовотель не был создан");
+            }
+
         }
         /// <summary>
         /// Удоляет выбраного пользователя
@@ -66,11 +82,20 @@ namespace BankUserLibrary
         public ICommand ClearUserCommand { get; }
         private void OnClearUserCommandExecuted(object p)
         {
-            if (UserAcount != null)
+            try
             {
-                UserAcount.RemuveAccount();
-                UserCollection.Remove(UserAcount);
-                UserAcount = null;
+                if (UserAcount != null)
+                {
+                    UserAcount.RemuveAccount();
+                    UserCollection.Remove(UserAcount);
+                    UserAcount = null;
+                }
+                else
+                    throw new UserExeption("Пользовотель для удоления не выбран");
+            }
+            catch (Exception)
+            {
+                UserIventer.Add("Пользовотель не был удален");
             }
         }
         /// <summary>
@@ -90,7 +115,10 @@ namespace BankUserLibrary
                     if (DepOr)
                     {
                         if (UserMoney == 0 && UserBet == 0)
-                            UserAcount.Add(new Account(10, 100));
+                        {
+                            UserAcount.Add(new Account());
+                            throw new UserExeption("Создан счет с изначальными пораметрами", false);
+                        }
                         else if (UserMoney < 0)
                             throw new UserExeption("Создание счета с отрицательным болансом не возможно!");
                         else
@@ -99,7 +127,10 @@ namespace BankUserLibrary
                     else
                     {
                         if (UserMoney == 0 && UserBet == 0 && UserLoanRare == 0)
-                            UserAcount.Add(new CreditAccount(10, 100, 10));
+                        {
+                            UserAcount.Add(new CreditAccount());
+                            throw new UserExeption("Создан кредит с изначальными пораметрами");
+                        }
                         else if (UserMoney < 0)
                             throw new UserExeption("Создание Кредита с отрицательным болансом не возможно!");
                         else
@@ -107,9 +138,9 @@ namespace BankUserLibrary
                     }
                 }
             }
-            catch (UserExeption)
+            catch (Exception)
             {
-                UserIventer.Add("Счет или кредит не был создан");
+                UserIventer.Add("Счет или кредит не был создан или создан с начальными параметрами");
             }
             UserMoney = 0; UserBet = 0; UserLoanRare = 0;
         }
@@ -119,11 +150,22 @@ namespace BankUserLibrary
         public ICommand CalculetionAccoundCommand { get; }
         private void OnCalculetionAccoundCommandExecuted(object p)
         {
-            if (Account != null && Account1 != null)
+            try
             {
-                UserAcount.Translation(Account, Calculetion.Minus, UserMoney);
-                UserAcount.Translation(Account1, Calculetion.Plus, UserMoney);
-                UserMoney = 0;
+                if (Account.IsIterect(UserMoney))
+                {
+                    if (Account != null && Account1 != null)
+                    {
+                        UserAcount.Translation(Account, Calculetion.Minus, UserMoney);
+                        UserAcount.Translation(Account1, Calculetion.Plus, UserMoney);
+                        UserMoney = 0;
+                    }
+                }
+                else throw new UserExeption("Деньги не могут быть переведены", false);
+            }
+            catch (Exception)
+            {
+                UserIventer.Add("Перевод не совершен");
             }
         }
         /// <summary>
